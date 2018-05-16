@@ -536,8 +536,9 @@ class Horse extends Element {
                 if (this.animation.actualTime < this.animation.maxTimeJump) {
                     this.animation.actualTime++;
                 } else {
+                    // allow to not repeat the animation when the horse go up (then stay at frame 3)
+                    // or down (then stay at frame 6)
                     if(!(this.animation.frame == 3 || this.animation.frame  == 6)){
-                    
                         this.animation.frame++;
                     }
                     this.animation.actualTime = 0;
@@ -587,7 +588,6 @@ class TextExperience extends Element {
         ctx.save();
         ctx.scale(this.scaleX, 1); // needed to flip the img
         ctx.textBaseline = "top";
-        //ctx.fillStyle = "rgba(66, 140, 244, " + this.alpha + ")";
         ctx.fillStyle = "rgba(102, 255, 51, " + this.alpha + ")";
         drawText(ctx,this.x * (1 / this.scaleX),this.y,this.text,"bold 20px Arial",null);
         ctx.restore();
