@@ -1,3 +1,1178 @@
+function clearCircle(ctx,radius,x,y,intervalX,intervalY){
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(x+intervalX, y+intervalY, radius, 0, 2*Math.PI, true);
+    ctx.clip();
+    ctx.clearRect(x-radius+intervalX,y-radius+intervalY,radius*2,radius*2);
+    ctx.restore();
+}
+
+function randomNumber(min, max) {
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}
+function drawScore(ctx, x, y, text, canvasWidth) {
+    ctx.font = "40px Verdana";
+    // Fill with gradient
+    ctx.fillStyle = "rgb(107, 244, 66)";
+    ctx.fillText(text + " / 50", x, y);
+}
+
+function drawText(ctx, x, y, text, font, textAlign) {
+    if (font) {
+        ctx.font = font;
+    }
+    if (textAlign) {
+        ctx.textAlign = textAlign;
+    }
+    ctx.fillText(text, x, y);
+}
+
+function drawMultipleText(ctx, arrayText) {
+    ctx.fillStyle = "black";
+    ctx.textAlign = "left";
+    arrayText.map(function (elem) {
+        drawText(ctx, elem.x, elem.y, elem.text, elem.font, elem.textAlign);
+    });
+}
+
+function getCvPart1(canvasWidth, canvasHeight) {
+    return [{
+            x: 30,
+            y: 30,
+            text: "Pierre Rouzaud",
+            font: "16px Arial"
+        },
+        {
+            x: 30,
+            y: 50,
+            text: "Tél : 06 06 06 06 06",
+            font: null
+        },
+        {
+            x: 30,
+            y: 70,
+            text: "Mail : test@gmail.com",
+            font: null
+        },
+        {
+            x: 30,
+            y: 90,
+            text: "Age : 22 ans",
+            font: null
+        },
+        {
+            x: 30,
+            y: 240,
+            text: "Mes Atouts",
+            font: "bold 20px Arial"
+        },
+        {
+            x: 30,
+            y: 270,
+            text: "Mes compétences professionnelles  dans le développement Web à la fois front-end",
+            font: "18px Arial"
+        },
+        {
+            x: 30,
+            y: 290,
+            text: "et back-end associées à ma formation en Dut Informatique et ma capacité linguistique. ",
+            font: null,
+        },
+        {
+            x: canvasWidth / 2,
+            y: 170,
+            text: "Développeur Web Full Stack",
+            textAlign: "center",
+            font: "bold 24px Arial",
+        },
+    ];
+}
+
+function getSkillsCv(canvasWidth,canvasHeight){
+    return [{
+        x: 30,
+        y: 320,
+        text: "Compétences",
+        textAlign: "start",
+        font: "bold 20px Arial"
+    },
+    {
+        x: 30,
+        y: 350,
+        text: "Langages informatiques",
+        font: "bold 18px Arial"
+    },
+    {
+        x: 45,
+        y: 380,
+        text: "- Langages Web : Javascript, Php, Html, Css",
+        font: "18px Arial"
+    },
+    {
+        x: 45,
+        y: 400,
+        text: "- SGBD : MYSQL",
+        font: null
+    },
+    {
+        x: 45,
+        y: 420,
+        text: "- Divers : Python, Java",
+        font: null
+    },
+    {
+        x: 30,
+        y: 450,
+        text: "Framework",
+        font: "bold 18px Arial"
+    },
+    {
+        x: 45,
+        y: 480,
+        text: "- Front : Bootstrap, Jquery, Angular, ReactJs",
+        font: "18px Arial"
+    },
+    {
+        x: 45,
+        y: 500,
+        text: "- Back : NodeJs, Express, Symfony",
+        font: "18px Arial"
+    },
+    {
+        x: 30,
+        y: 530,
+        text: "Langue",
+        font: "bold 18px Arial"
+    },
+    {
+        x: 45,
+        y: 550,
+        text: "- Anglais courant",
+        font: "18px Arial"
+    },
+    {
+        x: 30,
+        y: 580,
+        text: "Autres",
+        font: "bold 18px Arial"
+    },
+    {
+        x: 45,
+        y: 600,
+        text: "- Echanger sur les bugs rencontrés dans un projet",
+        font: "18px Arial"
+    },
+    {
+        x: 45,
+        y: 620,
+        text: "- Travailler en méthode agile",
+        font: null
+    },
+];
+}
+
+function getEndCV(canvasWidth,canvasHeight){
+    return [
+        {
+            x: 30,
+            y: 650,
+            text: "Projets",
+            textAlign: "start",
+            font: "bold 20px Arial"
+        },
+        {
+            x: 45,
+            y: 680,
+            text: "- Jeu CV (Vanilla JS, HTML/CSS)",
+            font: "18px Arial"
+        },
+        {
+            x: 30,
+            y: 710,
+            text: "Experience professionnelle :",
+            font: "bold 20px Arial"
+        },
+        {
+            x: 45,
+            y: 740,
+            text: "- Smartsitting, réalisation de la plateforme web (Symfony 3, Jquery, Bootstrap, HTML/CSS)",
+            font: "18px Arial"
+        },
+        {
+            x: 45,
+            y: 760,
+            text: "- Institut de France, Réalisation d'une plateforme de gestion des dons (MVC, PHP, HTML/CSS)",
+            font: "18px Arial"
+        },
+        {
+            x: 30,
+            y: 790,
+            text: "Diplômes :",
+            font: " bold 20px Arial"
+        },
+        {
+            x: 45,
+            y: 820,
+            text: "- 2018-2019 Formation Full Stack Js en alternance, IFOCOP",
+            font: "18px Arial"
+        },
+        {
+            x: 45,
+            y: 840,
+            text: "- 2015-2017 DUT Informatique, Université Paris Descartes",
+            font: "18px Arial"
+        },
+        {
+            x: 45,
+            y: 860,
+            text: "- 2015 Baccalauréat(STI2D) mention \"Très bien \"",
+            font: "18px Arial"
+        },
+        {
+            x: 30,
+            y: 890,
+            text: "Centres D'intérêt :",
+            font: "bold 20px Arial"
+        },
+        {
+            x: 45,
+            y: 910,
+            text: "- Nouvelles technologies, Web, IA (Machine Learning, Deep learning), Espace (NASA, Space X)",
+            font: "18px Arial"
+        },
+        {
+            x: 45,
+            y: 930,
+            text: "- E-sports (Tournoi de jeu vidéo online/offline) ",
+            font: null
+        },
+    ]
+}
+function drawCvPart1(ctx, canvasWidth, canvasHeight) {
+    var textToDraw = getCvPart1(canvasWidth, canvasHeight);
+    drawMultipleText(ctx, textToDraw);
+}
+
+function drawSkillsCv(ctx, canvasWidth, canvasHeight) {
+    var textToDraw = getSkillsCv(canvasWidth,canvasHeight);
+    drawMultipleText(ctx, textToDraw);
+}
+
+function drawMovingCV(ctx,tabCv,canvasWidth,canvasHeight){
+    tabCv.map(function(elemText){
+        elemText.y -= 0.3;
+        if (elemText.y < 0) {
+            elemText.y = canvasHeight*1.5;
+        }
+    });
+    drawMultipleText(ctx,tabCv);
+}
+"use strict";
+
+class Element {
+    constructor(x, y, width, height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+    setX(x) {
+        this.x = x;
+    }
+    setY(y) {
+        this.y = y;
+    }
+}
+
+class Portal extends Element {
+    constructor(img, x, y, width, height) {
+        super(x, y, width, height);
+        this.img = new Sprite(img, 2483, 329, 670, 670);
+        this.speed = 0.2;
+        this.direction = true;
+        this.maxMouv = y + 10;
+        this.scaleX = 0.4;
+        this.scaleY = 1;
+    }
+    move() {
+        if (this.y < this.maxMouv && this.direction) {
+            this.y += this.speed;
+        } else {
+            if (this.y > this.maxMouv - 20) {
+                this.y = this.y - this.speed;
+                this.direction = false;
+            } else {
+                this.direction = true;
+            }
+        }
+    }
+    setScaleXY(scaleX, scaleY) {
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
+    }
+    draw(ctx) {
+        this.move();
+
+        ctx.save();
+        ctx.scale(this.scaleX, this.scaleY)
+        // 870 * 2.5 cause 1/0.4 = 2.5
+        this.img.draw(ctx, this.x * (1 / this.scaleX), this.y * (1 / this.scaleY), this.width, this.height);
+        ctx.restore();
+
+    }
+}
+
+class Cloud extends Element {
+    constructor(img, x, y, width, height) {
+        super(x, y, width, height);
+        this.img = new Sprite(img, 0, 0, img.width, img.height);
+        this.speed = 1;
+        this.isCollision = false;
+    }
+    setIsCollision(bool) {
+        this.isCollision = bool;
+    }
+    effectCollision(collision) {
+        switch (collision.type) {
+            case "canvas":
+                switch (collision.direction) {
+                    case "left":
+                        //check if all img out
+                        if (collision.offset < 0) {
+                            this.x = collision.canvasWidth;
+                            this.speed = randomNumber(1, 4);
+                            return {
+                                isOut: true,
+                                speed: this.speed
+                            };
+                        } else {
+                            return {
+                                isOut: false
+                            };
+                        }
+                        break;
+                    case "right":
+                        return {
+                            isOut: false
+                        };
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    move() {
+        this.x -= this.speed;
+    }
+    draw(ctx) {
+        this.move();
+        this.img.draw(ctx, this.x, this.y, this.width, this.height);
+    }
+}
+
+class Skill extends Element {
+    constructor(img, x, y, width, height, distanceFall) {
+        super(x, y, width, height);
+        this.img = new Sprite(img, 0, 0, img.width, img.height);
+        this.speed = 1;
+        this.isCollision = false;
+        this.distanceFall = distanceFall;
+        this.alpha = 1;
+        this.collision = false;
+        this.score = 1;
+    }
+    move() {
+        if (this.collision) {
+            this.y -= 0.5;
+        } else {
+            if (this.x < this.distanceFall) {
+                this.y += this.speed;
+            } else {
+                this.x -= this.speed;
+            }
+        }
+    }
+    draw(ctx) {
+        this.move();
+        if (this.collision) {
+            ctx.fillStyle = "rgba(5, 111, 173, " + this.alpha + ")";
+            ctx.font = "24pt Arial";
+            ctx.fillText("+" + this.score, this.x, this.y + (this.height / 2));
+            this.alpha -= 0.005;
+        } else {
+            this.img.draw(ctx, this.x, this.y, this.width, this.height);
+        }
+    }
+
+}
+class Bomb extends Element {
+    constructor(imgBomb, imgExplosion, x, y, width, height, distanceFall) {
+        super(x, y, width, height);
+        this.speed = 1;
+        this.distanceFall = distanceFall;
+        this.explode = false;
+        this.animation = getAnimationBomb(imgBomb, imgExplosion);
+    }
+    move() {
+        if (!this.explode) {
+            if (this.x < this.distanceFall) {
+                this.y += this.speed;
+            } else {
+                this.x -= this.speed;
+            }
+        }
+    }
+    draw(ctx) {
+        this.move();
+        if (this.x < this.distanceFall) {
+            if (this.explode) {
+                this.animation.explosion.explode[this.animation.explosion.frame % 12].draw(
+                    ctx,
+                    this.x - (this.animation.explosion.explode[this.animation.explosion.frame % 12].sWidth / 2) + (this.width / 2),
+                    this.y - (this.animation.explosion.explode[this.animation.explosion.frame % 12].sHeight / 2) + (this.height / 2),
+                    this.animation.explosion.explode[this.animation.explosion.frame % 12].sWidth,
+                    this.animation.explosion.explode[this.animation.explosion.frame % 12].sHeight
+                );
+                if (this.animation.explosion.actualTime < this.animation.explosion.maxTime) {
+                    this.animation.explosion.actualTime++;
+                } else {
+                    this.animation.explosion.frame++;
+                    this.animation.explosion.actualTime = 0;
+                }
+            } else {
+                this.animation.bomb[this.animation.frame % 3].draw(
+                    ctx,
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height
+                );
+                if (this.animation.actualTime < this.animation.maxTime) {
+                    this.animation.actualTime++;
+                } else {
+                    this.animation.frame++;
+                    this.animation.actualTime = 0;
+                }
+            }
+        }
+    }
+}
+
+function createSkillOrBomb(imgsSkill, imgBomb, imgExplosion, cloud, canvasWidth) {
+    var objRet = {
+        type: null,
+        img: null
+    };
+    var score = 1;
+    switch (randomNumber(0, 40)) {
+        case 0:
+        case 1:
+        case 2:
+        case 3:
+        case 4:
+            score = 1;
+            objRet.type = "skill";
+            objRet.img = imgsSkill[randomNumber(0, 3)];
+            break;
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+            score = 2;
+            objRet.type = "skill";
+            objRet.img = imgsSkill[randomNumber(4, 5)];
+            break;
+        case 9:
+        case 10:
+        case 11:
+            score = 3;
+            objRet.type = "skill";
+            objRet.img = imgsSkill[randomNumber(6, 7)];
+            break;
+        case 12:
+        case 13:
+            score = 4;
+            objRet.type = "skill";
+            objRet.img = imgsSkill[randomNumber(8, 11)];
+            break;
+        default:
+            objRet.type = "bomb";
+            break;
+    }
+    if (objRet.type == "skill") {
+        var skill = new Skill(
+            objRet.img,
+            cloud.x + 30,
+            cloud.y + 10,
+            40,
+            50,
+            randomNumber(0, canvasWidth - 50)
+        );
+        skill.score = score;
+        skill.speed = cloud.speed;
+        return {
+            type: "skill",
+            obj: skill
+        };
+    } else {
+        var bomb = new Bomb(
+            imgBomb,
+            imgExplosion,
+            cloud.x + 30,
+            cloud.y + 10,
+            50,
+            50,
+            randomNumber(0, canvasWidth - 50)
+        );
+        bomb.speed = cloud.speed;
+        return {
+            type: "bomb",
+            obj: bomb
+        };
+    }
+
+}
+
+class Character extends Element {
+    constructor(img, x, y, width, height) {
+        super(x, y, width, height);
+        this.animation = getAnimationCharacter(img);
+        this.speed = 2;
+        this.isCollision = false;
+        this.arrowMove = [{
+                keyCode: 38,
+                keyIsUp: false
+            }, //up
+            {
+                keyCode: 40,
+                keyIsUp: false
+            }, //down
+            {
+                keyCode: 37,
+                keyIsUp: false
+            }, //left
+            {
+                keyCode: 39,
+                keyIsUp: false
+            }, //right
+            {
+                keyCode: 16,
+                keyIsUp: false
+            } //shift
+        ];
+    }
+    changeImg(img) {
+        this.animation = getAnimationCharacter(img);
+    }
+    restartCharacter() {
+        this.arrowMove.map(function (elem) {
+            elem.keyIsUp = false;
+        });
+        this.animation.direction = "stayStill";
+        this.x = 0;
+        this.y = 0;
+        this.speed = 2;
+        this.animation.maxTime = 10;
+        this.width = 60;
+        this.height = 79;
+    }
+    effectCollision(collision) {
+        switch (collision.type) {
+            case "canvas":
+                switch (collision.direction) {
+                    /* if collision with canvas add or sub speed to nullify movement and keep
+					character to the same place */
+                    case "left":
+                        this.setX(this.x + this.speed);
+                        return {
+                            isOut: true
+                        };
+                        break;
+                    case "right":
+                        this.setX(this.x - this.speed);
+                        return {
+                            isOut: true
+                        };
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    setIsCollision(bool) {
+        this.isCollision = bool;
+    }
+    move() {
+        this.arrowMove.map(item => {
+            if (item.keyIsUp) {
+                switch (item.keyCode) {
+                    case 38: //up
+                        //this.setY(this.getY() - this.speed);
+                        break;
+                    case 40: //down
+                        //this.setY(this.getY() + this.speed);
+                        break;
+                    case 37: //left
+                        this.setX(this.x - this.speed);
+                        this.animation.direction = "left";
+                        break;
+                    case 39: //right
+                        this.setX(this.x + this.speed);
+                        this.animation.direction = "right";
+                        break;
+                    case 16: //shift
+                        this.speed = 5;
+                        this.animation.maxTime = 3;
+                        break;
+                    default:
+                        return;
+                }
+            }
+        });
+    }
+    draw(ctx) {
+        this.move();
+        switch (this.animation.direction) {
+            case "stayStill":
+                this.animation.stayStill.draw(
+                    ctx,
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height
+                );
+                break;
+            case "left":
+                this.animation.left[this.animation.frame % 4].draw(
+                    ctx,
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height
+                );
+                if (this.animation.actualTime < this.animation.maxTime) {
+                    this.animation.actualTime++;
+                } else {
+                    this.animation.frame++;
+                    this.animation.actualTime = 0;
+                }
+                break;
+            case "right":
+                ctx.save();
+                ctx.scale(-1, 1); // needed to flip the img
+                this.animation.left[this.animation.frame % 4].draw(
+                    ctx,
+                    (this.x + this.width) * -1,
+                    this.y,
+                    this.width,
+                    this.height
+                );
+                if (this.animation.actualTime < this.animation.maxTime) {
+                    this.animation.actualTime++;
+                } else {
+                    this.animation.frame++;
+                    this.animation.actualTime = 0;
+                }
+                ctx.restore();
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+class Horse extends Element {
+    constructor(img, x, y, width, height) {
+        super(x, y, width, height);
+        this.animation = getAnimationHorse(img);
+        this.speed = 0.5;
+        this.distanceToGo = x;
+        this.isCollision = false;
+        this.isJumping = false;
+        this.baseY = y;
+        this.movementJumpUp = true;
+        this.velocityY = 0;
+        this.gravity = 0.5;
+        this.maxJump = 2;
+        this.actualJump = 0;
+        this.arrowMove = [{
+                keyCode: 37,
+                keyIsUp: false
+            }, //left
+            {
+                keyCode: 39,
+                keyIsUp: false
+            }, //right
+            {
+                keyCode: 16,
+                keyIsUp: false
+            }, //shift
+            {
+                keyCode: 32,
+                keyIsUp: false
+            } //shift
+        ];
+    }
+    setIsCollision(bool){
+        this.isCollision = bool;
+    }
+    effectCollision(collision) {
+        switch (collision.type) {
+            case "canvas":
+                switch (collision.direction) {
+                    case "up":
+                        this.velocityY = 0;
+                        this.movementJumpUp = false;
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case "experience":
+                this.distanceToGo +=30;
+                break;
+            default:
+                break;
+        }
+    }
+    move() {
+        if (this.isJumping) {
+            this.animation.direction = "jump";
+            if (this.velocityY > 0 && this.movementJumpUp) {
+                this.movementJumpUp = false;
+                this.animation.frame = 4;
+            }
+            this.velocityY += this.gravity;
+            if (this.movementJumpUp) {
+                this.y += this.velocityY;
+            } else {
+                this.y += this.velocityY;
+                if (this.y >= this.baseY) {
+                    this.animation.direction = "run";
+                    this.animation.frame = 0;
+                    this.isJumping = false;
+                    this.movementJumpUp = true;
+                    this.actualJump = 0;
+                    this.y = this.baseY;
+                }
+            }
+        }
+        if (this.x < this.distanceToGo) {
+            this.x += this.speed;
+        }
+    }
+    draw(ctx) {
+        this.move();
+        switch (this.animation.direction) {
+            case "stayStill":
+                this.animation.stayStill.draw(
+                    ctx,
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height
+                );
+                break;
+            case "run":
+                this.animation.run[this.animation.frame % 7].draw(
+                    ctx,
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height
+                );
+                if (this.animation.actualTime < this.animation.maxTime) {
+                    this.animation.actualTime++;
+                } else {
+                    this.animation.frame++;
+                    this.animation.actualTime = 0;
+                }
+                break;
+            case "jump":
+                this.animation.jump[this.animation.frame % 7].draw(
+                    ctx,
+                    this.x,
+                    this.y,
+                    this.width,
+                    this.height
+                );
+                if (this.animation.actualTime < this.animation.maxTimeJump) {
+                    this.animation.actualTime++;
+                } else {
+                    if(!(this.animation.frame == 3 || this.animation.frame  == 6)){
+                    
+                        this.animation.frame++;
+                    }
+                    this.animation.actualTime = 0;
+                }
+                break;
+            default:
+                break;
+        }
+
+    }
+}
+class TextExperience extends Element {
+    constructor(text, x, y, width, height) {
+        super(x, y, width, height);
+        this.text = text;
+        this.speed = 5;
+        this.isCollision = false;
+        this.scaleX = 1;
+        this.alpha = 1;
+    }
+    setIsCollision(bool){
+        this.isCollision = bool;
+    }
+    effectCollision(collision) {
+        this.setIsCollision(true);
+        switch (collision.type) {
+            case "canvas":
+                break;
+            case "horse":
+                console.log("horse");
+                
+                break;
+            default:
+                break;
+        }
+    }
+    move(){
+        if(!this.isCollision){
+            this.x -= this.speed
+        }else{
+            this.scaleX += -0.01;
+            this.alpha -= 0.005;
+        }
+    }
+    draw(ctx){
+        this.move();
+        ctx.save();
+        ctx.scale(this.scaleX, 1); // needed to flip the img
+        ctx.textBaseline = "top";
+        //ctx.fillStyle = "rgba(66, 140, 244, " + this.alpha + ")";
+        ctx.fillStyle = "rgba(102, 255, 51, " + this.alpha + ")";
+        drawText(ctx,this.x * (1 / this.scaleX),this.y,this.text,"bold 20px Arial",null);
+        ctx.restore();
+    }
+}
+
+function createTextExperience(ctx,canvasWidth){
+    var tabText = ["Dut Informatique, Paris Descartes", "Ifocop, Dev Full Stack JS", "Dev Web, Institut de France", "Dev Web Le Smartsitting"];
+    var selectedIndex = randomNumber(0,tabText.length-1);
+    return new TextExperience(
+        tabText[selectedIndex], 
+        canvasWidth, 
+        randomNumber(20, 500), 
+        300, 
+        20
+    );
+}
+
+class BackParallax extends Element{
+    constructor(img,x,y,width,height,speed){
+        super(x, y, width, height);
+        this.img = new Sprite(img, 0, 0, img.width, img.height);
+        this.speed = speed;
+    }
+    move(){
+        this.x -= this.speed;
+    }
+    draw(ctx,canvasWidth,canvasHeight){
+        this.move();
+        this.img.draw(ctx, this.x, this.y, canvasWidth, canvasHeight);
+        //if img is out of canvas draw an other img to fill the blank
+        if (this.x < 0) {
+            this.img.draw(ctx, this.x+canvasWidth, this.y, canvasWidth, canvasHeight);
+        }
+        //if image completely out set x to 0
+        if ((this.x + canvasWidth)<= 0) {
+            this.x = 0;
+        }
+    }
+}
+
+class Tile extends Element{
+    constructor(img,x,y,width,height,speed){
+        super(x,y,width,height);
+        this.img = new Sprite(img, 0, 0, img.width, img.height);
+        this.speed = speed;
+    }
+    move(){
+        this.x -= this.speed;
+    }
+    draw(ctx){
+        this.move();
+        this.img.draw(ctx,this.x,this.y,this.width,this.height);
+    }
+}
+
+// http://spritedatabase.net/file/21543/Horse
+
+class Sprite {
+    constructor(img, sx, sy, sWidth, sHeight) {
+        this.img = img;
+        this.sX = sx;
+        this.sY = sy;
+        this.sWidth = sWidth;
+        this.sHeight = sHeight;
+    }
+    draw(ctx, dx, dy, dWidth, dHeight) {
+        ctx.drawImage(this.img, this.sX, this.sY, this.sWidth, this.sHeight, dx, dy, dWidth, dHeight);
+    }
+}
+
+function getPortalElement(img) {
+    return new Sprite(img, 2483, 329, 670, 670);
+}
+
+function getAnimationCharacter(img) {
+    // console.log(srcImg);
+    var sWidth = 120;
+    var sHeight = 158;
+    var interval = 4.5;
+    var posX = 9;
+    var posY = 167;
+    var tabSprite = [];
+    for (let i = 0; i < 4; i++) {
+        tabSprite.push(new Sprite(img, posX, posY, sWidth, sHeight));
+        posX += sWidth + interval * 2;
+    }
+    var objAnimation = {
+        stayStill: new Sprite(img, 7, 1, 120, 156),
+        left: tabSprite,
+        right: tabSprite,
+        frame: 0,
+        direction: "stayStill",
+        maxTime: 10, // set how much time the frame appear before next one 
+        actualTime: 0
+    }
+    return objAnimation;
+}
+
+function getAnimationBomb(img, imgExplosion) {
+    return {
+        frame: 0,
+        maxTime: 10,
+        actualTime: 0,
+        bomb: [
+            new Sprite(img, 24, 3, 77, 107),
+            new Sprite(img, 149, 3, 84, 109),
+            new Sprite(img, 277, 3, 83, 112)
+        ],
+        explosion: getAnimationExplosion(imgExplosion),
+    }
+}
+
+function getAnimationExplosion(img) {
+    return {
+        frame: 0,
+        maxTime: 3,
+        actualTime: 0,
+        explode: [
+            new Sprite(img, 30, 19, 66, 76),
+            new Sprite(img, 140, 9, 96, 109),
+            new Sprite(img, 263, 1, 108, 121),
+            new Sprite(img, 391, 4, 113, 119),
+            new Sprite(img, 11, 133, 106, 115),
+            new Sprite(img, 141, 134, 102, 114),
+            new Sprite(img, 269, 141, 95, 97),
+            new Sprite(img, 398, 142, 93, 92),
+            new Sprite(img, 24, 273, 79, 88),
+            new Sprite(img, 165, 294, 47, 53),
+            new Sprite(img, 292, 294, 48, 52),
+            new Sprite(img, 421, 296, 45, 49),
+        ]
+    }
+}
+
+function getAnimationHorse(img) {
+    var jumpSprites = [];
+    var runSprites = [];
+    var pointerImgX = 960;
+    for (var i = 0; i < 7; i++) {
+        jumpSprites.push(new Sprite(img, pointerImgX, 0, 192, 144));
+        pointerImgX += 192;
+    }
+    pointerImgX = 2304;
+    for (var j = 0; j < 7; j++) {
+        runSprites.push(new Sprite(img, pointerImgX, 0, 192, 144));
+        pointerImgX += 192;
+    }
+    return {
+        stayStill: new Sprite(img, 0, 0, 192, 144),
+        run: runSprites,
+        jump: jumpSprites,
+        frame: 0,
+        direction: "stayStill",
+        maxTime: 4, // set how much time the frame appear before next one 
+        maxTimeJump: 7, // set how much time the frame appear before next one 
+        actualTime: 0
+
+    }
+}
+
+function loadImgs(tabSrc,keylevel0,keylevel1, callback) {
+    var tabRetImg = [];
+    tabSrc.map(function (src, index) {
+        var oneImg = new Image();
+        oneImg.src = src;
+        /// When end loadimg if the element is the last of the array execute callback 
+        oneImg.onload = function () {
+            if (tabSrc.length - (index + 1) == 0) {
+                callback(tabRetImg,keylevel0,keylevel1);
+            }
+        }
+        tabRetImg.push(oneImg);
+    });
+
+}
+
+function getNumberTabAssets(assets) {
+    var numberAttr = 0;
+    for (var keylevel0 in assets) {
+        if (assets.hasOwnProperty(keylevel0)) {
+            for (var keylevel1 in assets[keylevel0]) {
+                if (assets[keylevel0].hasOwnProperty(keylevel1)) {
+                    numberAttr++;
+                }
+            }
+        }
+    }
+    return numberAttr;
+}
+
+function loadAssets(callback) {
+    var assetsSrc = {
+        background: {
+            forest: [
+                "assets/background/forest/background.png",
+                "assets/background/forest/bigClouds.png",
+                "assets/background/forest/hill.png",
+                "assets/background/forest/bushes.png",
+                "assets/background/forest/distantTrees.png",
+                "assets/background/forest/tree.png",
+                "assets/background/forest/ground.png"
+            ],
+            western: [
+                "assets/background/western/background.png",
+                "assets/background/western/stars.png",
+                "assets/background/western/sun.png",
+                "assets/background/western/mountains.png",
+                "assets/background/western/clouds.png",
+                "assets/background/western/layer4.png",
+                "assets/background/western/layer3.png",
+                "assets/background/western/layer2.png",
+                "assets/background/western/layer1.png"
+            ]
+        },
+        characters: {
+            rick: [
+                "assets/character/rick.png",
+                "assets/character/rickCowboy.png",
+
+            ],
+            morty: [
+                "assets/character/mortyNoEye.png",
+                "assets/character/mortyOneEye.png",
+                "assets/character/morty.png",
+                "assets/character/mortyThreeEye.png",
+                "assets/character/mortyCowboy.png",
+            ],
+            horse: [
+                "assets/character/horseSprite.png",
+            ]
+        },
+        effects: {
+            explosion: ["assets/effects/effectExplo.png"],
+        },
+        elements: {
+            bomb: [
+                "assets/elements/bomb.png"
+            ],
+            clouds: [
+                "assets/elements/cloud1.png",
+                "assets/elements/cloud2.png",
+                "assets/elements/cloud3.png",
+                "assets/elements/cloud4.png",
+                "assets/elements/cloud5.png",
+            ],
+            portal: [
+                "assets/elements/element.png"
+            ],
+            skills: [
+                "assets/skills/html.png",
+                "assets/skills/css.png",
+                "assets/skills/js.png",
+                "assets/skills/php.png",
+                "assets/skills/jquery.png",
+                "assets/skills/bootstrap.png",
+                "assets/skills/angular.png",
+                "assets/skills/react.png",
+                "assets/skills/symfony.png",
+                "assets/skills/nodejs.png",
+                "assets/skills/mongodb.png",
+                "assets/skills/mysql.png",
+            ]
+        },
+        tiles: {
+            grass: [
+                "assets/tiles/grass/tile_grass_02.png"
+            ]
+        }
+    }
+    var assets = {
+        background: {
+            forest: null,
+            western: null,
+        },
+        characters: {
+            rick: null,
+            morty: null,
+            horse: null,
+        },
+        effects: {
+            explosion: null,
+        },
+        elements: {
+            bomb: null,
+            clouds: null,
+            portal: null,
+            skills: null
+        },
+        tiles: {
+            grass: null
+        }
+    }
+    var numTab = getNumberTabAssets(assetsSrc);   
+    var numberAttr = 0;
+    var numberObj = 0;
+    var numTotalAttr = 0;
+    for (var keylevel0 in assetsSrc) {
+        if (assetsSrc.hasOwnProperty(keylevel0)) {
+            numberObj++;
+            numberAttr = 0;
+            for (var keylevel1 in assetsSrc[keylevel0]) {
+                if (assetsSrc[keylevel0].hasOwnProperty(keylevel1)) {
+                    numberAttr++;
+                    loadImgs(assetsSrc[keylevel0][keylevel1],keylevel0,keylevel1, function (tabImg,keylevel0,keylevel1) {                
+                        assets[keylevel0][keylevel1] = tabImg;
+                        numTotalAttr++;                        
+                        if (numTotalAttr == numTab) {
+                            callback(assets);
+                        }
+                    });
+                }
+            }
+        }
+    }
+}
 "use strict";
 
 class CollisionDetector {
@@ -416,7 +1591,7 @@ class Game {
                 clouds.push(cloud);
             }
             //////////////////////////////////////
-            /// Init characters ///
+            //Characters
             this.characters.rick.x = 800;
             this.characters.rick.y = 50;
             var rick = this.characters.rick;
@@ -425,25 +1600,11 @@ class Game {
             this.characters.morty.changeImg(this.elemStage.morty[0]);
             var morty = this.characters.morty;
             ///////////////////////////////
-            /// Create Cloud for Rick ///
-            var cloudRick = {
-                x: 780,
-                y: 80,
-                width: 110,
-                height: 70,
-                img: new Sprite(
-                    this.elemStage.clouds[0],
-                    0,
-                    0,
-                    this.elemStage.clouds[0].width,
-                    this.elemStage.clouds[0].height
-                )
-            }
             //Detect Collision
             var objCollision = this.collisionDetector;
             //////////////////////
             //Player
-            var scorePlayer = 49;
+            var scorePlayer = 0;
             var visionPlayer = 100;
             //////////
             window.requestAnimationFrame(loopGame);
@@ -572,9 +1733,7 @@ class Game {
                 });
 
                 ////////////////////
-                /// Draw cloud of rick ///
-                cloudRick.img.draw(ctxs.game,cloudRick.x,cloudRick.y,cloudRick.width,cloudRick.height);
-                /// Draw Rick and Morty
+                //Morty
                 rick.draw(ctxs.game);
                 morty.draw(ctxs.game);
                 //
@@ -608,8 +1767,6 @@ class Game {
                 ctxs.ui.clearRect(0, 0, canvasWidth, canvasHeight);
                 // Collision
                 objCollision.isOutCanvas(morty);
-                /// Draw cloud Rick /// 
-                cloudRick.img.draw(ctxs.game,cloudRick.x,rick.y+30,cloudRick.width,cloudRick.height);
                 morty.draw(ctxs.game);
                 drawScore(ctxs.ui, canvasWidth / 2, 50, scorePlayer, canvasWidth);
 
@@ -1249,8 +2406,8 @@ class Game {
         };
         /////////////////////////////////End Stage 5///////////////////////////////////////////////
         /// Add all stages in object game 
-        stages.push(stage1);
-        stages.push(stage2);
+        //stages.push(stage1);
+        //stages.push(stage2);
         stages.push(stage3);
         stages.push(stage4);
         stages.push(stage5);
