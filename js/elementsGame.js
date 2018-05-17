@@ -158,35 +158,33 @@ class Bomb extends Element {
     }
     draw(ctx) {
         this.move();
-        if (this.x < this.distanceFall) {
-            if (this.explode) {
-                this.animation.explosion.explode[this.animation.explosion.frame % 12].draw(
-                    ctx,
-                    this.x - (this.animation.explosion.explode[this.animation.explosion.frame % 12].sWidth / 2) + (this.width / 2),
-                    this.y - (this.animation.explosion.explode[this.animation.explosion.frame % 12].sHeight / 2) + (this.height / 2),
-                    this.animation.explosion.explode[this.animation.explosion.frame % 12].sWidth,
-                    this.animation.explosion.explode[this.animation.explosion.frame % 12].sHeight
-                );
-                if (this.animation.explosion.actualTime < this.animation.explosion.maxTime) {
-                    this.animation.explosion.actualTime++;
-                } else {
-                    this.animation.explosion.frame++;
-                    this.animation.explosion.actualTime = 0;
-                }
+        if (this.explode) {
+            this.animation.explosion.explode[this.animation.explosion.frame % 12].draw(
+                ctx,
+                this.x - (this.animation.explosion.explode[this.animation.explosion.frame % 12].sWidth / 2) + (this.width / 2),
+                this.y - (this.animation.explosion.explode[this.animation.explosion.frame % 12].sHeight / 2) + (this.height / 2),
+                this.animation.explosion.explode[this.animation.explosion.frame % 12].sWidth,
+                this.animation.explosion.explode[this.animation.explosion.frame % 12].sHeight
+            );
+            if (this.animation.explosion.actualTime < this.animation.explosion.maxTime) {
+                this.animation.explosion.actualTime++;
             } else {
-                this.animation.bomb[this.animation.frame % 3].draw(
-                    ctx,
-                    this.x,
-                    this.y,
-                    this.width,
-                    this.height
-                );
-                if (this.animation.actualTime < this.animation.maxTime) {
-                    this.animation.actualTime++;
-                } else {
-                    this.animation.frame++;
-                    this.animation.actualTime = 0;
-                }
+                this.animation.explosion.frame++;
+                this.animation.explosion.actualTime = 0;
+            }
+        } else {
+            this.animation.bomb[this.animation.frame % 3].draw(
+                ctx,
+                this.x,
+                this.y,
+                this.width,
+                this.height
+            );
+            if (this.animation.actualTime < this.animation.maxTime) {
+                this.animation.actualTime++;
+            } else {
+                this.animation.frame++;
+                this.animation.actualTime = 0;
             }
         }
     }
@@ -450,7 +448,7 @@ class Horse extends Element {
             } //shift
         ];
     }
-    setIsCollision(bool){
+    setIsCollision(bool) {
         this.isCollision = bool;
     }
     effectCollision(collision) {
@@ -466,7 +464,7 @@ class Horse extends Element {
                 }
                 break;
             case "experience":
-                this.distanceToGo +=30;
+                this.distanceToGo += 30;
                 break;
             default:
                 break;
@@ -538,7 +536,7 @@ class Horse extends Element {
                 } else {
                     // allow to not repeat the animation when the horse go up (then stay at frame 3)
                     // or down (then stay at frame 6)
-                    if(!(this.animation.frame == 3 || this.animation.frame  == 6)){
+                    if (!(this.animation.frame == 3 || this.animation.frame == 6)) {
                         this.animation.frame++;
                     }
                     this.animation.actualTime = 0;
@@ -559,7 +557,7 @@ class TextExperience extends Element {
         this.scaleX = 1;
         this.alpha = 1;
     }
-    setIsCollision(bool){
+    setIsCollision(bool) {
         this.isCollision = bool;
     }
     effectCollision(collision) {
@@ -569,39 +567,39 @@ class TextExperience extends Element {
                 break;
             case "horse":
                 console.log("horse");
-                
+
                 break;
             default:
                 break;
         }
     }
-    move(){
-        if(!this.isCollision){
+    move() {
+        if (!this.isCollision) {
             this.x -= this.speed
-        }else{
+        } else {
             this.scaleX += -0.01;
             this.alpha -= 0.005;
         }
     }
-    draw(ctx){
+    draw(ctx) {
         this.move();
         ctx.save();
         ctx.scale(this.scaleX, 1); // needed to flip the img
         ctx.textBaseline = "top";
         ctx.fillStyle = "rgba(102, 255, 51, " + this.alpha + ")";
-        drawText(ctx,this.x * (1 / this.scaleX),this.y,this.text,"bold 20px Arial",null);
+        drawText(ctx, this.x * (1 / this.scaleX), this.y, this.text, "bold 20px Arial", null);
         ctx.restore();
     }
 }
 
-function createTextExperience(ctx,canvasWidth){
+function createTextExperience(ctx, canvasWidth) {
     var tabText = ["Dut Informatique, Paris Descartes", "Ifocop, Dev Full Stack JS", "Dev Web, Institut de France", "Dev Web Le Smartsitting"];
-    var selectedIndex = randomNumber(0,tabText.length-1);
+    var selectedIndex = randomNumber(0, tabText.length - 1);
     return new TextExperience(
-        tabText[selectedIndex], 
-        canvasWidth, 
-        randomNumber(20, 500), 
-        300, 
+        tabText[selectedIndex],
+        canvasWidth,
+        randomNumber(20, 500),
+        300,
         20
     );
 }

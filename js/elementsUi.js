@@ -1,7 +1,7 @@
 function drawScore(ctx, x, y, text, canvasWidth) {
     ctx.font = "40px Verdana";
     // Fill with gradient
-    ctx.fillStyle = "rgb(107, 244, 66)";
+    ctx.fillStyle = "rgb(5, 111, 173)";
     ctx.fillText(text + " / 50", x, y);
 }
 
@@ -28,7 +28,7 @@ function getCvPart1(canvasWidth, canvasHeight) {
             x: 30,
             y: 30,
             text: "Pierre Rouzaud",
-            font: "16px Arial"
+            font: "16px Lucida Sans Unicode"
         },
         {
             x: 30,
@@ -52,13 +52,13 @@ function getCvPart1(canvasWidth, canvasHeight) {
             x: 30,
             y: 240,
             text: "Mes Atouts",
-            font: "bold 20px Arial"
+            font: "bold 20px Lucida Sans Unicode"
         },
         {
             x: 30,
             y: 270,
             text: "Mes compétences professionnelles  dans le développement Web à la fois front-end",
-            font: "18px Arial"
+            font: "18px Lucida Sans Unicode"
         },
         {
             x: 30,
@@ -71,7 +71,7 @@ function getCvPart1(canvasWidth, canvasHeight) {
             y: 170,
             text: "Développeur Web Full Stack",
             textAlign: "center",
-            font: "bold 24px Arial",
+            font: "bold 24px Lucida Sans Unicode",
         },
     ];
 }
@@ -82,19 +82,19 @@ function getSkillsCv(canvasWidth,canvasHeight){
         y: 320,
         text: "Compétences",
         textAlign: "start",
-        font: "bold 20px Arial"
+        font: "bold 20px Lucida Sans Unicode"
     },
     {
         x: 30,
         y: 350,
         text: "Langages informatiques",
-        font: "bold 18px Arial"
+        font: "bold 18px Lucida Sans Unicode"
     },
     {
         x: 45,
         y: 380,
         text: "- Langages Web : Javascript, Php, Html, Css",
-        font: "18px Arial"
+        font: "18px Lucida Sans Unicode"
     },
     {
         x: 45,
@@ -112,43 +112,43 @@ function getSkillsCv(canvasWidth,canvasHeight){
         x: 30,
         y: 450,
         text: "Framework",
-        font: "bold 18px Arial"
+        font: "bold 18px Lucida Sans Unicode"
     },
     {
         x: 45,
         y: 480,
         text: "- Front : Bootstrap, Jquery, Angular, ReactJs",
-        font: "18px Arial"
+        font: "18px Lucida Sans Unicode"
     },
     {
         x: 45,
         y: 500,
         text: "- Back : NodeJs, Express, Symfony",
-        font: "18px Arial"
+        font: "18px Lucida Sans Unicode"
     },
     {
         x: 30,
         y: 530,
         text: "Langue",
-        font: "bold 18px Arial"
+        font: "bold 18px Lucida Sans Unicode"
     },
     {
         x: 45,
         y: 550,
         text: "- Anglais courant",
-        font: "18px Arial"
+        font: "18px Lucida Sans Unicode"
     },
     {
         x: 30,
         y: 580,
         text: "Autres",
-        font: "bold 18px Arial"
+        font: "bold 18px Lucida Sans Unicode"
     },
     {
         x: 45,
         y: 600,
         text: "- Echanger sur les bugs rencontrés dans un projet",
-        font: "18px Arial"
+        font: "18px Lucida Sans Unicode"
     },
     {
         x: 45,
@@ -166,67 +166,67 @@ function getEndCV(canvasWidth,canvasHeight){
             y: 650,
             text: "Projets",
             textAlign: "start",
-            font: "bold 20px Arial"
+            font: "bold 20px Lucida Sans Unicode"
         },
         {
             x: 45,
             y: 680,
             text: "- Jeu CV (Vanilla JS, HTML/CSS)",
-            font: "18px Arial"
+            font: "18px Lucida Sans Unicode"
         },
         {
             x: 30,
             y: 710,
             text: "Experience professionnelle :",
-            font: "bold 20px Arial"
+            font: "bold 20px Lucida Sans Unicode"
         },
         {
             x: 45,
             y: 740,
             text: "- Smartsitting, réalisation de la plateforme web (Symfony 3, Jquery, Bootstrap, HTML/CSS)",
-            font: "18px Arial"
+            font: "18px Lucida Sans Unicode"
         },
         {
             x: 45,
             y: 760,
             text: "- Institut de France, Réalisation d'une plateforme de gestion des dons (MVC, PHP, HTML/CSS)",
-            font: "18px Arial"
+            font: "18px Lucida Sans Unicode"
         },
         {
             x: 30,
             y: 790,
             text: "Diplômes :",
-            font: " bold 20px Arial"
+            font: " bold 20px Lucida Sans Unicode"
         },
         {
             x: 45,
             y: 820,
             text: "- 2018-2019 Formation Full Stack Js en alternance, IFOCOP",
-            font: "18px Arial"
+            font: "18px Lucida Sans Unicode"
         },
         {
             x: 45,
             y: 840,
             text: "- 2015-2017 DUT Informatique, Université Paris Descartes",
-            font: "18px Arial"
+            font: "18px Lucida Sans Unicode"
         },
         {
             x: 45,
             y: 860,
             text: "- 2015 Baccalauréat(STI2D) mention \"Très bien \"",
-            font: "18px Arial"
+            font: "18px Lucida Sans Unicode"
         },
         {
             x: 30,
             y: 890,
             text: "Centres D'intérêt :",
-            font: "bold 20px Arial"
+            font: "bold 20px Lucida Sans Unicode"
         },
         {
             x: 45,
             y: 910,
             text: "- Nouvelles technologies, Web, IA (Machine Learning, Deep learning), Espace (NASA, Space X)",
-            font: "18px Arial"
+            font: "18px Lucida Sans Unicode"
         },
         {
             x: 45,

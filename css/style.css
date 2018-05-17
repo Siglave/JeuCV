@@ -4,10 +4,6 @@ body, html{
     padding: 0;
     height: 100%;
 }
-#main-page{
-    
-}
-
 .background-cv{
     background-image: url("../assets/background/paper.png");
     height: 100%; 
@@ -34,27 +30,25 @@ body, html{
     right: 0;
     top : 5%;
     position: absolute;
-    background-color: blueviolet
+    background-color: black
 }
  ul{
     list-style-type: none;
 }
 
 .link-menu{
-    background-color: cadetblue;
+    background-color: white;
     width: 100%;
     padding: 10px 20px 10px 50px;
     margin-bottom: 5px;
 }
-
-
 
 /***************/
 
 /* Canvas */
 canvas {
     position: absolute;
-    /* border: 1px solid black ; */
+    border: 1px solid black ;
     top: 50%;
     left: 50%;
     margin-top: -350px;
@@ -71,4 +65,18 @@ canvas {
 
 #game-ui {
     z-index: 3;
+}
+
+/* Info game */
+#info-game{
+    margin-top: -350px;
+    margin-left: -500px;
+    top: 70%;
+    left: 50%;
+    width: 1000px;
+    height: 150px;
+    position: absolute;
+    z-index: 4;
+    background-color: grey;
+
 }

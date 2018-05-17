@@ -214,7 +214,7 @@ function loadAssets(callback) {
         ui :{
             background: [
                 "assets/background/paper.png",
-            ]
+            ],
         } 
     }
     var assets = {
@@ -240,8 +240,8 @@ function loadAssets(callback) {
             grass: null
         },
         ui :{
-            background: null
-        }
+            background: null,
+        },
     }
     var numTab = getNumberTabAssets(assetsSrc);   
     var numberAttr = 0;

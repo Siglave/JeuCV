@@ -302,7 +302,7 @@ class Game {
             gradient.addColorStop("1.0", "green");
 
             drawCvPart1(ctxs.ui, canvasWidth, canvasHeight);
-            drawText(ctxs.ui, 900, 240, "Compétences", "bold 18px Arial", null, null);
+            drawText(ctxs.ui, 900, 240, "Compétences", "bold 18px Lucida Sans Unicode", null, null);
 
             window.requestAnimationFrame(loop);
 
@@ -372,7 +372,8 @@ class Game {
             skills: this.objAssets.elements.skills,
             bomb: this.objAssets.elements.bomb,
             explosion: this.objAssets.effects.explosion,
-            portal: this.objAssets.elements.portal
+            portal: this.objAssets.elements.portal,
+            uiInfo : this.objAssets.ui.elementInfo
         }
         var elemBackStage2 = this.objAssets.background.forest;
         var stage2 = new Stage(
@@ -460,18 +461,17 @@ class Game {
                 objCollision.isOutCanvas(morty);
 
                 //////////////
+                /// Hide parts of the game ///
                 if (visionPlayer < 550) {
-                    /* ctxs.ui.fillStyle = "grey";
-                    ctxs.ui.fillRect(0, 0, canvasWidth, canvasHeight); */
+                    /// Draw the img on top of the game ///
                     imgToHide.draw(ctxs.ui,0,0,canvasWidth,canvasHeight);
-                    // to see morty
+                    /// to see morty ///
                     clearCircle(ctxs.ui, visionPlayer, morty.x, morty.y, 30, 30);
-                    //////////////////
-                    //to see rick
+                    /// to see rick ///
                     clearCircle(ctxs.ui, 70, rick.x, rick.y, 30, 35);
                 }
                 //////////////////               
-                //Draw Clouds
+                /// Draw Clouds ///
                 var testCollisionCloud;
                 clouds.map(function (cloud) {
                     testCollisionCloud = objCollision.isOutCanvas(cloud);
@@ -572,7 +572,12 @@ class Game {
                                 bombs.splice(index, 1);
                             }, 0);
                         } else {
-                            bomb.draw(ctxs.game);
+                            if(bomb.x < bomb.distanceFall){
+                                bomb.draw(ctxs.game);
+                            }else{
+                                bomb.draw(ctxs.ui);
+
+                            }
                         }
                     }
                 });
@@ -587,6 +592,7 @@ class Game {
                 //Draw UI/////
                 drawScore(ctxs.ui, canvasWidth / 2, 50, scorePlayer, canvasWidth);
                 //////////////
+
                 if (endStage) {
                     clouds.map(function (cloud) {
                         cloud.speed = cloud.speed * 2;
@@ -787,7 +793,7 @@ class Game {
             drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
             drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
             ctxs.ui.fillStyle = "black";
-            drawText(ctxs.ui, 810, 260, "Expérience/Diplômes", "bold 18px Arial", "start");
+            drawText(ctxs.ui, 810, 260, "Expérience/Diplômes", "bold 18px Lucida Sans Unicode", "start");
             window.requestAnimationFrame(loop);
 
             function loop() {
@@ -802,7 +808,7 @@ class Game {
                 drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
                 drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
                 ctxs.ui.fillStyle = "black";
-                drawText(ctxs.ui, 810, 260, "Expérience/Diplômes", "bold 18px Arial", "start");
+                drawText(ctxs.ui, 810, 260, "Expérience/Diplômes", "bold 18px Lucida Sans Unicode", "start");
 
                 /* ctxs.back.fillStyle = gradient;
                 ctxs.back.fillRect(morty.x + 10, canvasHeight / 3 * 2, canvasWidth, 1); */
@@ -1234,7 +1240,7 @@ class Game {
                 y: 350,
                 timeCvDownloaded: 0,
                 text: "Download CV Here !",
-                font: "bold 24px Arial",
+                font: "bold 24px Lucida Sans Unicode",
                 align: "start",
                 color: "black",
                 isDownload: false,
