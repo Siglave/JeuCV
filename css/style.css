@@ -1,21 +1,74 @@
+/* Main page */
+body, html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+#main-page{
+    
+}
 
+.background-cv{
+    background-image: url("../assets/background/paper.png");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.background-forest{
+    background-image: url("../assets/background/forest/background.png");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.background-western{
+    background-image: url("../assets/background/western/background.png");
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;    
+}
+/* Menu */
+#menu{
+    right: 0;
+    top : 5%;
+    position: absolute;
+    background-color: blueviolet
+}
+ ul{
+    list-style-type: none;
+}
+
+.link-menu{
+    background-color: cadetblue;
+    width: 100%;
+    padding: 10px 20px 10px 50px;
+    margin-bottom: 5px;
+}
+
+
+
+/***************/
+
+/* Canvas */
 canvas {
     position: absolute;
-    border: 1px solid black ;
+    /* border: 1px solid black ; */
     top: 50%;
     left: 50%;
     margin-top: -350px;
     margin-left: -500px;
 }
 
-#gameBackGround {
+#game-background {
     z-index: 1;
 }
 
-#gameCanvas {
+#game-canvas {
     z-index: 2;
 }
 
-#gameUI {
+#game-ui {
     z-index: 3;
 }

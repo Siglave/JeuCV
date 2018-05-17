@@ -17,9 +17,9 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     function initGameClass(objAssets) {
-        var canvasBack = document.getElementById("gameBackGround");
-        var canvasGame = document.getElementById("gameCanvas");
-        var canvasUI = document.getElementById("gameUI");
+        var canvasBack = document.getElementById("game-background");
+        var canvasGame = document.getElementById("game-canvas");
+        var canvasUI = document.getElementById("game-ui");
         var ctxBack = canvasBack.getContext("2d");
         var ctxGame = canvasGame.getContext("2d");
         var ctxUI = canvasUI.getContext("2d");

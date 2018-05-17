@@ -210,7 +210,12 @@ function loadAssets(callback) {
             grass: [
                 "assets/tiles/grass/tile_grass_02.png"
             ]
-        }
+        },
+        ui :{
+            background: [
+                "assets/background/paper.png",
+            ]
+        } 
     }
     var assets = {
         background: {
@@ -233,6 +238,9 @@ function loadAssets(callback) {
         },
         tiles: {
             grass: null
+        },
+        ui :{
+            background: null
         }
     }
     var numTab = getNumberTabAssets(assetsSrc);   

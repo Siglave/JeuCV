@@ -181,16 +181,25 @@ class Game {
         var functAnim = animTransitionStage.bind(this);
         var valuexL = 0;
         var valuexR = this.canvasWidth / 2;
+
+        var transiSprite = new Sprite(this.objAssets.ui.background[0],0,0,this.objAssets.ui.background[0].width,this.objAssets.ui.background[0].height);
         window.requestAnimationFrame(functAnim);
 
         function animTransitionStage() {
+            console.log(this);
+            console.log("switch");
+            
             this.ctxs.ui.fillStyle = "black";
             //left
             this.ctxs.ui.clearRect(valuexL, 0, this.canvasWidth / 2, this.canvasHeight);
-            this.ctxs.ui.fillRect(valuexL, 0, this.canvasWidth / 2, this.canvasHeight);
+            //this.ctxs.ui.fillRect(valuexL, 0, this.canvasWidth / 2, this.canvasHeight);
+/*             console.log(this.objAssets.ui);
+ */            
+            this.stages[this.actualStage].transitionImg.draw(this.ctxs.ui,valuexL,0,this.canvasWidth / 2, this.canvasHeight);
             //right
             this.ctxs.ui.clearRect(valuexR, 0, this.canvasWidth / 2, this.canvasHeight);
-            this.ctxs.ui.fillRect(valuexR, 0, this.canvasWidth / 2, this.canvasHeight);
+            //this.ctxs.ui.fillRect(valuexR, 0, this.canvasWidth / 2, this.canvasHeight);
+            this.stages[this.actualStage].transitionImg.draw(this.ctxs.ui,valuexR, 0, this.canvasWidth / 2, this.canvasHeight);
             valuexL -= 5;
             valuexR += 5;
             if (valuexL * -1 < this.canvasWidth / 2) {
@@ -269,7 +278,8 @@ class Game {
             this.characters,
             this.collisionDetector,
             stage1FctDown,
-            stage1FctUp
+            stage1FctUp,
+            this.objAssets.ui.background[0]
         );
 
         stage1.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
@@ -297,31 +307,24 @@ class Game {
             window.requestAnimationFrame(loop);
 
             function loop() {
-                objCollision.isOutCanvas(rick);
-                //objCollision.trucRick(rick,morty.x+morty.width);
-                objCollision.isOutCanvas(morty);
-                //gameDraw
+                /// Clean canvas ///
                 ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
                 ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
+                /// Detect Collision ///
+                objCollision.isOutCanvas(rick);
+                objCollision.isOutCanvas(morty);
+                /// Draw line for rick and morty to walk ///
+                /* ctxs.back.fillStyle = gradient;
+                ctxs.back.fillRect(morty.x + 10, canvasHeight / 3 * 2, canvasWidth, 1); */
 
-                ctxs.back.fillStyle = gradient;
-                ctxs.back.fillRect(morty.x + 10, canvasHeight / 3 * 2, canvasWidth, 1);
-
-                rick.draw(ctxs.game);
                 morty.draw(ctxs.game);
-
-                //blank block to make character disepear
-                ctxs.game.fillStyle = "white";
-                ctxs.game.fillRect(
-                    900,
-                    canvasHeight / 3 * 2 - 108,
-                    canvasWidth,
-                    108
-                );
-                //Draw portal
+                /// Make rick disappear if pass portal ///
+                if(!(rick.x > portal.x)){
+                    rick.draw(ctxs.game);
+                }
+                /// Draw portal ///
                 portal.draw(ctxs.game);
-
-                if (morty.x > canvasWidth - 130) {
+                if (morty.x > portal.x) {
                     fctStop();
                 } else {
                     window.requestAnimationFrame(loop);
@@ -378,20 +381,22 @@ class Game {
             this.characters,
             this.collisionDetector,
             stage2FctDown,
-            stage2FctUp
+            stage2FctUp,
+            this.objAssets.background.forest[0]
+
         );
 
         stage2.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
             var elemStage = this.elemStage;
+            var imgToHide = this.transitionImg;
             var endStage = false;
+            /// Change backgound of web site ///
+            changeBacgroundSite("forest");
             //Background
             this.elemBack.map(function (elem) {
                 var s = new Sprite(elem, 0, 0, elem.width, elem.height);
                 s.draw(ctxs.back, 0, 0, canvasWidth, canvasHeight);
             });
-            ///////////////////////////////
-            // Define portal
-            //var portal = getPortalElement(this.elemStage[0]);
             ///////////////////////////////////////////
             // Create Clouds and Skills
             var skills = [];
@@ -443,7 +448,7 @@ class Game {
             var objCollision = this.collisionDetector;
             //////////////////////
             //Player
-            var scorePlayer = 49;
+            var scorePlayer = 0;
             var visionPlayer = 100;
             //////////
             window.requestAnimationFrame(loopGame);
@@ -456,8 +461,9 @@ class Game {
 
                 //////////////
                 if (visionPlayer < 550) {
-                    ctxs.ui.fillStyle = "grey";
-                    ctxs.ui.fillRect(0, 0, canvasWidth, canvasHeight);
+                    /* ctxs.ui.fillStyle = "grey";
+                    ctxs.ui.fillRect(0, 0, canvasWidth, canvasHeight); */
+                    imgToHide.draw(ctxs.ui,0,0,canvasWidth,canvasHeight);
                     // to see morty
                     clearCircle(ctxs.ui, visionPlayer, morty.x, morty.y, 30, 30);
                     //////////////////
@@ -618,7 +624,7 @@ class Game {
                     fctStop();
 
                 }
-                // make rick disepear if he pass the portal
+                // make rick disappear if he pass the portal
                 if (portalMorty.x > rick.x) {
                     rick.draw(ctxs.game);
                 }
@@ -748,11 +754,15 @@ class Game {
             this.characters,
             this.collisionDetector,
             stage3FctDown,
-            stage3FctUp
+            stage3FctUp,
+            this.objAssets.ui.background[0]
+
         );
 
         stage3.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
-            console.log("stage3");
+            /// Change backgound web site ///
+            changeBacgroundSite("cv");
+
             ctxs.back.fillStyle = "white";
             ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight);
 
@@ -794,20 +804,13 @@ class Game {
                 ctxs.ui.fillStyle = "black";
                 drawText(ctxs.ui, 810, 260, "Expérience/Diplômes", "bold 18px Arial", "start");
 
-                ctxs.back.fillStyle = gradient;
-                ctxs.back.fillRect(morty.x + 10, canvasHeight / 3 * 2, canvasWidth, 1);
+                /* ctxs.back.fillStyle = gradient;
+                ctxs.back.fillRect(morty.x + 10, canvasHeight / 3 * 2, canvasWidth, 1); */
 
-                rick.draw(ctxs.game);
+                if(!(rick.x > portal.x)){
+                    rick.draw(ctxs.game);
+                }
                 morty.draw(ctxs.game);
-
-                //blank block to make character disepear
-                ctxs.game.fillStyle = "white";
-                ctxs.game.fillRect(
-                    900,
-                    canvasHeight / 3 * 2 - 108,
-                    canvasWidth,
-                    108
-                );
                 //Draw portal
                 portal.draw(ctxs.game);
 
@@ -857,14 +860,17 @@ class Game {
             this.characters,
             this.collisionDetector,
             stage4FctDown,
-            stage4FctUp
+            stage4FctUp,
+            this.objAssets.background.western[0]
+
         );
         //Add horse character in stage4
         stage4.characters.horse = new Horse(this.objAssets.characters.horse[0], 0, 450, 156, 120);
         stage4.characters.horse.animation.direction = "run";
 
         stage4.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
-            console.log("stage4");
+            /// Change background web site ///
+            changeBacgroundSite("western");
             //Define objectCollision
             var objCollision = this.collisionDetector;
             //Define speed for each background
@@ -1192,11 +1198,14 @@ class Game {
             this.characters,
             this.collisionDetector,
             stage5FctDown,
-            stage5FctUp
+            stage5FctUp,
+            this.objAssets.ui.background[0]
         );
 
         stage5.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
-            console.log("stage5");
+            /// Change background web site ///
+            changeBacgroundSite("cv");
+
             ctxs.back.fillStyle = "white";
             ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight);
 
@@ -1219,11 +1228,12 @@ class Game {
                     getEndCV(canvasWidth, canvasHeight)
                 )
             );
+            /// object to display download Pdf text ///
             var pdfText = {
-                x: 700,
-                y: 300,
+                x: 690,
+                y: 350,
                 timeCvDownloaded: 0,
-                text: "Download Pdf CV !",
+                text: "Download CV Here !",
                 font: "bold 24px Arial",
                 align: "start",
                 color: "black",
@@ -1233,7 +1243,7 @@ class Game {
                     drawText(ctx, this.x, this.y, this.text, this.font, this.align);
                 }
             }
-            // allow to change the color of the text
+            /// allow to change the color of the text ///
             var idInterPdf = setInterval(function () {
                 if (!pdfText.isDownload) {
                     if (pdfText.color == "black") {
@@ -1247,14 +1257,13 @@ class Game {
 
             function loop() {
                 objCollision.isOutCanvasRickAndMorty(morty, rick);
-
-                //gameDraw
+                /// Clean all canvas ///
                 ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
                 ctxs.back.clearRect(0, 0, canvasWidth, canvasHeight);
                 ctxs.ui.clearRect(0, 0, canvasWidth, canvasHeight);
-                // Draw Download pdf 
+                /// Draw "Download pdf" /// 
                 pdfText.draw(ctxs.ui);
-                // Collision for Download Pdf 
+                /// Collision for object Download Pdf /// 
                 if (morty.x > pdfText.x) {
                     if (!pdfText.isDownload) {
                         downloadPdf();
@@ -1266,7 +1275,7 @@ class Game {
                 } else {
                     if (pdfText.isDownload) {
                         pdfText.isDownload = false;
-                        pdfText.text = "Download Pdf CV !";
+                        pdfText.text = "Download CV Here!";
                         if(!(pdfText.timeCvDownloaded>3)){
                             for(var i = 0; i <pdfText.timeCvDownloaded;i++){
                                 pdfText.text = "Re"+pdfText.text;
@@ -1278,8 +1287,8 @@ class Game {
                     }
                 }
                 drawMovingCV(ctxs.back, tabElemnentCV, canvasWidth, canvasHeight);
-                ctxs.back.fillStyle = gradient;
-                ctxs.back.fillRect(0, canvasHeight / 3 * 2, canvasWidth, 1);
+               /*  ctxs.back.fillStyle = gradient;
+                ctxs.back.fillRect(0, canvasHeight / 3 * 2, canvasWidth, 1); */
                 /// Draw rick and morty ///
                 // fix x of rick to follow morty
                 rick.x = morty.x + 60;
@@ -1291,11 +1300,10 @@ class Game {
         };
         /////////////////////////////////End Stage 5///////////////////////////////////////////////
         /// Add all stages in object game 
-        /* stages.push(stage1);
+        stages.push(stage1);
         stages.push(stage2);
         stages.push(stage3);
         stages.push(stage4);
- */
         stages.push(stage5);
 
         return stages;
@@ -1309,7 +1317,8 @@ class Stage {
         characters,
         collisionDetector,
         fctKeyDown,
-        fctKeyUp
+        fctKeyUp,
+        transitionImg
     ) {
         this.elemStage = elemStage;
         this.elemBack = elemBack;
@@ -1318,6 +1327,7 @@ class Stage {
         this.characters = characters;
         this.startStage = false;
         this.collisionDetector = collisionDetector;
+        this.transitionImg = new Sprite(transitionImg,0,0,transitionImg.width,transitionImg.height);
 
         this.fctKeyDown = this.fctKeyDown.bind(this);
         this.fctKeyUp = this.fctKeyUp.bind(this);
