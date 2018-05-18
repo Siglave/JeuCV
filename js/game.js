@@ -109,7 +109,6 @@ class CollisionDetector {
         }
     }
 }
-
 class Game {
     constructor(objAssets, canvasWidth, canvasHeight, ctxs) {
         this.ctxs = ctxs; // obj ctxs {ui:ctx,game:ctx,back:ctx}
@@ -283,6 +282,8 @@ class Game {
         );
 
         stage1.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
+            /// Show stage info UI ///
+            showInfoStage(1);
             //Background
             ctxs.back.fillStyle = "white";
             ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight);
@@ -388,6 +389,9 @@ class Game {
         );
 
         stage2.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
+            /// Show stage info UI ///
+            showInfoStage(2);
+            //////////////////////////
             var elemStage = this.elemStage;
             var imgToHide = this.transitionImg;
             var endStage = false;
@@ -766,6 +770,8 @@ class Game {
         );
 
         stage3.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
+            /// Show stage info UI ///
+            showInfoStage(3);
             /// Change backgound web site ///
             changeBacgroundSite("cv");
 
@@ -875,6 +881,8 @@ class Game {
         stage4.characters.horse.animation.direction = "run";
 
         stage4.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
+            /// Show stage info UI ///
+            showInfoStage(4);
             /// Change background web site ///
             changeBacgroundSite("western");
             //Define objectCollision
@@ -1209,6 +1217,8 @@ class Game {
         );
 
         stage5.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
+            /// Show stage info UI ///
+            showInfoStage(5);
             /// Change background web site ///
             changeBacgroundSite("cv");
 
@@ -1307,9 +1317,9 @@ class Game {
         /////////////////////////////////End Stage 5///////////////////////////////////////////////
         /// Add all stages in object game 
         stages.push(stage1);
-        stages.push(stage2);
-        stages.push(stage3);
-        stages.push(stage4);
+        //stages.push(stage2);
+        //stages.push(stage3);
+        //stages.push(stage4);
         stages.push(stage5);
 
         return stages;

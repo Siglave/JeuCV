@@ -1,42 +1,52 @@
 /* Main page */
-body, html{
+
+body,
+html {
     margin: 0;
     padding: 0;
     height: 100%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
 }
-.background-cv{
+
+.background-cv {
     background-image: url("../assets/background/paper.png");
-    height: 100%; 
+    height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-.background-forest{
+
+.background-forest {
     background-image: url("../assets/background/forest/background.png");
-    height: 100%; 
+    height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
-.background-western{
+
+.background-western {
     background-image: url("../assets/background/western/background.png");
-    height: 100%; 
+    height: 100%;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;    
+    background-size: cover;
 }
+
 /* Menu */
-#menu{
+
+#menu {
     right: 0;
-    top : 5%;
+    top: 5%;
     position: absolute;
     background-color: black
 }
- ul{
+
+ul {
     list-style-type: none;
 }
 
-.link-menu{
+.link-menu {
     background-color: white;
     width: 100%;
     padding: 10px 20px 10px 50px;
@@ -46,13 +56,17 @@ body, html{
 /***************/
 
 /* Canvas */
+
 canvas {
     position: absolute;
-    border: 1px solid black ;
+    border: 1px solid black;
     top: 50%;
     left: 50%;
     margin-top: -350px;
-    margin-left: -500px;
+    margin-left: -350px;
+    /* filter: blur(2px); */ 
+    /* background-color: black; */
+    /* opacity: 0.2; */
 }
 
 #game-background {
@@ -68,15 +82,60 @@ canvas {
 }
 
 /* Info game */
-#info-game{
-    margin-top: -350px;
-    margin-left: -500px;
-    top: 70%;
-    left: 50%;
-    width: 1000px;
-    height: 150px;
+
+#info-game {
+    top: 0;
+    left: 0;
+    width: 260px;
     position: absolute;
     z-index: 4;
     background-color: grey;
+    border-radius: 0% 0% 50% 0%;
+    /* padding: 2%; */
+    padding: 0% 2% 1% 2%;
+}
 
+.icon-ctrl {
+    width: 64px;
+    vertical-align: middle;
+}
+.icon-skill{
+    width: 32px;
+}
+
+.block-ctrl {
+    /* width: 400px; */
+    /* float: right; */
+}
+.label-ctrl{
+    margin-left: 30px; 
+    margin-right: 10px; 
+}
+.title-info{
+    font-size: 24px;
+}
+#stage-one {
+
+}
+
+#stage-two {
+    display: none;
+}
+
+#stage-three {
+    display: none;
+}
+
+#stage-four {
+    display: none;
+}
+
+#stage-five {
+    display: none;
+}
+
+.block-info-stage{
+    /* float: left; */
+    /* width: 390px; */
+    /* margin-left: 10px; */
 }

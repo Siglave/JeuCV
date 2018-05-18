@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,13 +14,14 @@
     <script src="js/game.js"></script>
     <script src="js/script.js"></script>
     <script src="js/siteScript.js"></script>
-<!--  <script src="scriptTest.js"></script>  -->
-<!--  <script src="test.js"></script>  -->
-<!--  <script src="scriptT.js"></script> 
- --> 
-   <!--  <script src="allT.js"></script>  -->
+    <!--  <script src="scriptTest.js"></script>  -->
+    <!--  <script src="test.js"></script>  -->
+    <!--  <script src="scriptT.js"></script> 
+ -->
+    <!--  <script src="allT.js"></script>  -->
     <title>Rick and Morty CV</title>
 </head>
+
 <body>
     <div id="menu">
         <ul>
@@ -32,15 +34,136 @@
         </ul>
     </div>
     <div id="main-page" class="background-cv">
-        <a id="pdf-cv" href="cvRouzaudPierre.pdf" download style="display: none">salut salut</a>
+        <a id="pdf-cv" href="cvRouzaudPierre.pdf" download style="display: none"></a>
         <div id="game-cv">
             <canvas id="game-background" width="1000" height="700"></canvas>
             <canvas id="game-canvas" width="1000" height="700"></canvas>
             <canvas id="game-ui" width="1000" height="700"></canvas>
-            <div id="info-game">
+            <div id="info-game" width="1000" height="700">
+                <div id="stage-one">
+                    <div class="block-info-stage">
+                        <p class="title-info">Info Niveau : </p>
+                        <p>Avance jusqu'au portail !</p>
+                    </div>
+                    <div class="block-ctrl">
+                        <p class="title-info">Controles : </p>
+                        <p>
+                            <span class="label-ctrl">Droite</span>
+                            <img class="icon-ctrl" src="assets/ui/arrowR.png" alt="arrowRight">
+                        </p>
+                        <p>
+                            <span class="label-ctrl">Sprint</span>
+                            <img class="icon-ctrl" src="assets/ui/shift.png" alt="shift">
+                        </p>
+                    </div>
+                </div>
+                <div id="stage-two">
+                    <div class="block-info-stage">
+                        <p class="title-info">Info Niveau : </p>
+                        <p>
+                            Attrape 50pts de competences, Attention aux Bombes !
+                        </p>
+                        <p>
+                            <img class="icon-ctrl icon-skill" src="assets/skills/html.png" alt="html">
+                            <img class="icon-ctrl icon-skill" src="assets/skills/css.png" alt="html">
+                            <img class="icon-ctrl icon-skill" src="assets/skills/js.png" alt="html">
+                            <img class="icon-ctrl icon-skill" src="assets/skills/php.png" alt="html">
+                            <span class="label-ctrl">+ 1pt</span>
+                        </p>
+                        <p>
 
+                            <img class="icon-ctrl icon-skill" src="assets/skills/bootstrap.png" alt="html">
+                            <img class="icon-ctrl icon-skill" src="assets/skills/jquery.png" alt="html">
+                            <span>+ 2pt</span>
+                        </p>
+                        <p>
+                            <img class="icon-ctrl icon-skill" src="assets/skills/angular.png" alt="html">
+                            <img class="icon-ctrl icon-skill" src="assets/skills/react.png" alt="html">
+                            <span>+ 3pt</span>
+                        </p>
+                        <p>
+                            <img class="icon-ctrl icon-skill" src="assets/skills/nodejs.png" alt="nodejs">
+                            <img class="icon-ctrl icon-skill" src="assets/skills/symfony.png" alt="symfony">
+                            <img class="icon-ctrl icon-skill" src="assets/skills/mongodb.png" alt="mongodb">
+                            <img class="icon-ctrl icon-skill" src="assets/skills/mysql.png" alt="html">
+                            <span>+ 4pt</span>
+                        </p>
+                        <p>
+                            <img class="icon-ctrl" width="96" height="64" src="assets/ui/bomb.jpg" alt="bomb">
+                            <span style="color: red;font-size: 20px">
+                                <b>- 1pt</b>
+                            </span>
+                        </p>
+
+
+                    </div>
+                    <div class="block-ctrl">
+                        <p class="title-info">Controles : </p>
+                        <p>
+
+                            <span class="label-ctrl">Gauche</span>
+                            <img class="icon-ctrl" src="assets/ui/arrowL.png" alt="arrowLeft">
+                        </p>
+                        <p>
+
+                            <span class="label-ctrl">Droite</span>
+                            <img class="icon-ctrl" src="assets/ui/arrowR.png" alt="arrowRight">
+                        </p>
+                        <p>
+
+                            <span class="label-ctrl">Sprint</span>
+                            <img class="icon-ctrl" src="assets/ui/shift.png" alt="shift">
+                        </p>
+                    </div>
+                </div>
+                <div id="stage-three">
+                    <div class="block-info-stage">
+                        <p class="title-info">Info Niveau : </p>
+                        <p>Avance jusqu'au portail !</p>
+                    </div>
+                    <div class="block-ctrl">
+                        <p class="title-info">Controles : </p>
+                        <span class="label-ctrl">Droite</span>
+                        <img class="icon-ctrl" src="assets/ui/arrowR.png" alt="arrowRight">
+
+                        <span class="label-ctrl">Sprint</span>
+                        <img class="icon-ctrl" src="assets/ui/shift.png" alt="shift">
+                    </div>
+                </div>
+                <div id="stage-four">
+                    <div class="block-info-stage">
+                        <p class="title-info">Info Niveau : </p>
+                    </div>
+                    <div class="block-ctrl">
+                        <p class="title-info">Controles : </p>
+                        <span class="label-ctrl">Saut</span>
+                        <img class="icon-ctrl" src="assets/ui/space.png" alt="saut">
+                    </div>
+                </div>
+                <div id="stage-five">
+                    <div class="block-info-stage">
+                        <p class="title-info">Info Niveau : </p>
+                        <p>Avance jusqu'au portail !</p>
+                    </div>
+                    <div class="block-ctrl">
+                        <p class="title-info">Controles : </p>
+                        <p>
+                            <span class="label-ctrl">Gauche</span>
+                            <img class="icon-ctrl" src="assets/ui/arrowL.png" alt="arrowLeft">
+                        </p>
+                        <p>
+                            <span class="label-ctrl">Droite</span>
+                            <img class="icon-ctrl" src="assets/ui/arrowR.png" alt="arrowRight">
+                        </p> 
+                        <p>
+                            <span class="label-ctrl">Sprint</span>
+                            <img class="icon-ctrl" src="assets/ui/shift.png" alt="shift">
+                        </p> 
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>

@@ -21,3 +21,15 @@ function changeBacgroundSite(choiceBack){
             break;
     }
 }
+// hide all panel expect the one pass in parameter
+function showInfoStage(stageToShow){
+    var tabIdStage = ["stage-one","stage-two","stage-three","stage-four","stage-five"];
+
+    tabIdStage.map(function(idStageBlock,index){
+        if(stageToShow == index+1){
+            document.getElementById(idStageBlock).style.display = "block";
+        }else{
+            document.getElementById(idStageBlock).style.display = "none";
+        }
+    });
+}
