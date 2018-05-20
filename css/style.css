@@ -6,7 +6,6 @@ html {
     padding: 0;
     height: 100%;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
 }
 
 .background-cv {
@@ -59,12 +58,12 @@ ul {
 
 canvas {
     position: absolute;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     top: 50%;
     left: 50%;
     margin-top: -350px;
     margin-left: -350px;
-    /* filter: blur(2px); */ 
+    /* filter: blur(2px); */
     /* background-color: black; */
     /* opacity: 0.2; */
 }
@@ -89,7 +88,8 @@ canvas {
     width: 260px;
     position: absolute;
     z-index: 4;
-    background-color: grey;
+    /* background-color: grey; */
+    background: linear-gradient(to bottom right, #00b901, #8fe938);
     border-radius: 0% 0% 50% 0%;
     /* padding: 2%; */
     padding: 0% 2% 1% 2%;
@@ -99,24 +99,23 @@ canvas {
     width: 64px;
     vertical-align: middle;
 }
-.icon-skill{
+
+.icon-skill {
     width: 32px;
 }
 
-.block-ctrl {
-    /* width: 400px; */
-    /* float: right; */
+
+
+.label-ctrl {
+    margin-left: 30px;
+    margin-right: 10px;
 }
-.label-ctrl{
-    margin-left: 30px; 
-    margin-right: 10px; 
-}
-.title-info{
+
+.title-info {
     font-size: 24px;
 }
-#stage-one {
 
-}
+#stage-one {}
 
 #stage-two {
     display: none;
@@ -134,8 +133,41 @@ canvas {
     display: none;
 }
 
-.block-info-stage{
-    /* float: left; */
-    /* width: 390px; */
-    /* margin-left: 10px; */
+.triangle-git {
+    position: fixed;
+    right: 0;
+    z-index: 10;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 150px 150px 0;
+    border-color: transparent #00b901 transparent transparent;
+}
+.triangle-git:hover {
+    border-color: transparent #6ce96c transparent transparent;
+}
+.img-git{
+    width: 64px;
+    height: 64px;
+    margin: 15px 0px 0px 75px;
+}
+
+.triangle-cv{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 150px 150px;
+    border-color: transparent transparent #00b901 transparent;
+}
+.triangle-cv:hover {
+    border-color: transparent transparent #6ce96c transparent;
+}
+.img-pdf{
+    width: 64px;
+    height: 64px;
+    margin: 75px 0 0 -75px;
 }

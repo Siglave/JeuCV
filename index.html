@@ -23,17 +23,23 @@
 </head>
 
 <body>
-    <div id="menu">
-        <ul>
-            <li class="link-menu border-bottom">
-                <a class="border-left ">Github</a>
-            </li>
-            <li class="link-menu border-bottom">
-                <a class="border-left ">Download CV</a>
-            </li>
-        </ul>
-    </div>
     <div id="main-page" class="background-cv">
+        <!-- <div id="menu">
+            <ul>
+                <li class="link-menu border-bottom">
+                    <a class="border-left ">Github</a>
+                </li>
+                <li class="link-menu border-bottom">
+                    <a class="border-left ">Download CV</a>
+                </li>
+            </ul>
+        </div> -->
+        <a class="triangle-git" href="https://github.com/Siglave/JeuCV" target="_blank">
+            <img class="img-git" src="assets/ui/github.png">
+        </a>
+        <a class="triangle-cv" href="cvRouzaudPierre.pdf" download>
+            <img class="img-pdf" src="assets/ui/pdf.png">
+        </a>
         <a id="pdf-cv" href="cvRouzaudPierre.pdf" download style="display: none"></a>
         <div id="game-cv">
             <canvas id="game-background" width="1000" height="700"></canvas>
@@ -71,7 +77,6 @@
                             <span class="label-ctrl">+ 1pt</span>
                         </p>
                         <p>
-
                             <img class="icon-ctrl icon-skill" src="assets/skills/bootstrap.png" alt="html">
                             <img class="icon-ctrl icon-skill" src="assets/skills/jquery.png" alt="html">
                             <span>+ 2pt</span>
@@ -94,23 +99,18 @@
                                 <b>- 1pt</b>
                             </span>
                         </p>
-
-
                     </div>
                     <div class="block-ctrl">
                         <p class="title-info">Controles : </p>
                         <p>
-
                             <span class="label-ctrl">Gauche</span>
                             <img class="icon-ctrl" src="assets/ui/arrowL.png" alt="arrowLeft">
                         </p>
                         <p>
-
                             <span class="label-ctrl">Droite</span>
                             <img class="icon-ctrl" src="assets/ui/arrowR.png" alt="arrowRight">
                         </p>
                         <p>
-
                             <span class="label-ctrl">Sprint</span>
                             <img class="icon-ctrl" src="assets/ui/shift.png" alt="shift">
                         </p>
@@ -123,16 +123,20 @@
                     </div>
                     <div class="block-ctrl">
                         <p class="title-info">Controles : </p>
-                        <span class="label-ctrl">Droite</span>
-                        <img class="icon-ctrl" src="assets/ui/arrowR.png" alt="arrowRight">
-
-                        <span class="label-ctrl">Sprint</span>
-                        <img class="icon-ctrl" src="assets/ui/shift.png" alt="shift">
+                        <p>
+                            <span class="label-ctrl">Droite</span>
+                            <img class="icon-ctrl" src="assets/ui/arrowR.png" alt="arrowRight">
+                        </p>
+                        <p>
+                            <span class="label-ctrl">Sprint</span>
+                            <img class="icon-ctrl" src="assets/ui/shift.png" alt="shift">
+                        </p>
                     </div>
                 </div>
                 <div id="stage-four">
                     <div class="block-info-stage">
                         <p class="title-info">Info Niveau : </p>
+                        <p>Sauve morty en sautant sur les textes dans le ciel.</p>
                     </div>
                     <div class="block-ctrl">
                         <p class="title-info">Controles : </p>
@@ -142,8 +146,9 @@
                 </div>
                 <div id="stage-five">
                     <div class="block-info-stage">
-                        <p class="title-info">Info Niveau : </p>
-                        <p>Avance jusqu'au portail !</p>
+                        <p class="title-info">Bravo !</p>
+                        <p>Maintenant tu peux telecharger mon cv en passant sous le
+                            texte.</p>
                     </div>
                     <div class="block-ctrl">
                         <p class="title-info">Controles : </p>
@@ -154,11 +159,11 @@
                         <p>
                             <span class="label-ctrl">Droite</span>
                             <img class="icon-ctrl" src="assets/ui/arrowR.png" alt="arrowRight">
-                        </p> 
+                        </p>
                         <p>
                             <span class="label-ctrl">Sprint</span>
                             <img class="icon-ctrl" src="assets/ui/shift.png" alt="shift">
-                        </p> 
+                        </p>
                     </div>
                 </div>
             </div>
