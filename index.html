@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/utilityCanvas.js"></script>
     <script src="js/elementsUi.js"></script>
     <script src="js/elementsGame.js"></script>
@@ -24,16 +25,6 @@
 
 <body>
     <div id="main-page" class="background-cv">
-        <!-- <div id="menu">
-            <ul>
-                <li class="link-menu border-bottom">
-                    <a class="border-left ">Github</a>
-                </li>
-                <li class="link-menu border-bottom">
-                    <a class="border-left ">Download CV</a>
-                </li>
-            </ul>
-        </div> -->
         <a class="triangle-git" href="https://github.com/Siglave/JeuCV" target="_blank">
             <img class="img-git" src="assets/ui/github.png">
         </a>
@@ -41,6 +32,7 @@
             <img class="img-pdf" src="assets/ui/pdf.png">
         </a>
         <a id="pdf-cv" href="cvRouzaudPierre.pdf" download style="display: none"></a>
+        <button id="start-game" class="btn-5" type="button">Start Game</button>
         <div id="game-cv">
             <canvas id="game-background" width="1000" height="700"></canvas>
             <canvas id="game-canvas" width="1000" height="700"></canvas>

@@ -24,6 +24,7 @@ class Portal extends Element {
         this.maxMouv = y + 10;
         this.scaleX = 0.4;
         this.scaleY = 1;
+        this.sound = new Audio("assets/sounds/portal.mp3");
     }
     move() {
         if (this.y < this.maxMouv && this.direction) {
@@ -114,6 +115,8 @@ class Skill extends Element {
         this.alpha = 1;
         this.collision = false;
         this.score = 1;
+        this.sound = new Audio("assets/sounds/coin.mp3");
+
     }
     move() {
         if (this.collision) {
@@ -146,6 +149,7 @@ class Bomb extends Element {
         this.distanceFall = distanceFall;
         this.explode = false;
         this.animation = getAnimationBomb(imgBomb, imgExplosion);
+        this.sound = new Audio("assets/sounds/bomb.mp3");
     }
     move() {
         if (!this.explode) {
@@ -447,6 +451,14 @@ class Horse extends Element {
                 keyIsUp: false
             } //shift
         ];
+        this.soundRun = new Audio("assets/sounds/runhorse.mp3");
+        this.soundRun.volume = 0.3;
+        this.soundRun.addEventListener('ended',function(){
+            this.currentTime = 0;
+            this.play();
+        });
+        this.soundJump = new Audio("assets/sounds/jumphorse.mp3");
+        this.soundJump.volume = 0.6;
     }
     setIsCollision(bool) {
         this.isCollision = bool;
@@ -472,6 +484,7 @@ class Horse extends Element {
     }
     move() {
         if (this.isJumping) {
+            this.soundRun.pause();
             this.animation.direction = "jump";
             if (this.velocityY > 0 && this.movementJumpUp) {
                 this.movementJumpUp = false;
@@ -490,6 +503,10 @@ class Horse extends Element {
                     this.actualJump = 0;
                     this.y = this.baseY;
                 }
+            }
+        }else{
+            if(this.animation.direction == "run"){
+                this.soundRun.play();
             }
         }
         if (this.x < this.distanceToGo) {
@@ -556,6 +573,7 @@ class TextExperience extends Element {
         this.isCollision = false;
         this.scaleX = 1;
         this.alpha = 1;
+        this.sound = new Audio("assets/sounds/exp.mp3")
     }
     setIsCollision(bool) {
         this.isCollision = bool;

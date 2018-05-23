@@ -32,24 +32,31 @@ html {
     background-size: cover;
 }
 
-/* Menu */
-
-#menu {
-    right: 0;
-    top: 5%;
+/* Start Btn */
+#start-game{
     position: absolute;
-    background-color: black
+    z-index: 10;
+    top: 40%;
+    left: 50%;
+    font-size: 50px;
+    font-weight: 100;
+    margin-left: -100px;
+    padding: 1%;
+    border-top: 2px solid #065488;
+    border-bottom: 2px solid #065488;
+    border-right: 2px solid transparent;
+    border-left: 2px solid transparent;
+    color: #065488;
+    /* background-color: rgb(93, 189, 233); */
+   /* border-radius: 40% 0 40% 0; */
 }
-
-ul {
-    list-style-type: none;
-}
-
-.link-menu {
-    background-color: white;
-    width: 100%;
-    padding: 10px 20px 10px 50px;
-    margin-bottom: 5px;
+#start-game:hover{
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-right: 2px solid #065488;
+    border-left: 2px solid #065488;
+    font-weight: bold;
+    font-style: oblique;
 }
 
 /***************/
@@ -58,14 +65,10 @@ ul {
 
 canvas {
     position: absolute;
-    /* border: 1px solid black; */
     top: 50%;
     left: 50%;
     margin-top: -350px;
     margin-left: -350px;
-    /* filter: blur(2px); */
-    /* background-color: black; */
-    /* opacity: 0.2; */
 }
 
 #game-background {
@@ -88,11 +91,10 @@ canvas {
     width: 260px;
     position: absolute;
     z-index: 4;
-    /* background-color: grey; */
     background: linear-gradient(to bottom right, #00b901, #8fe938);
     border-radius: 0% 0% 50% 0%;
-    /* padding: 2%; */
     padding: 0% 2% 1% 2%;
+    display: none;
 }
 
 .icon-ctrl {
@@ -104,8 +106,6 @@ canvas {
     width: 32px;
 }
 
-
-
 .label-ctrl {
     margin-left: 30px;
     margin-right: 10px;
@@ -114,9 +114,9 @@ canvas {
 .title-info {
     font-size: 24px;
 }
-
-#stage-one {}
-
+#stage-one {
+    display: none;
+}
 #stage-two {
     display: none;
 }

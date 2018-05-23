@@ -144,12 +144,15 @@ class Game {
     }
     startGame() {
         this.stages[this.actualStage].loadListeners();
+        // Start Music
+        this.stages[this.actualStage].startMusic();
         this.stages[this.actualStage].start(
             this.ctxs,
             this.canvasWidth,
             this.canvasHeight,
             this.switchStage
         );
+       
     }
     switchStage() {
         //console.log("autreStage");
@@ -166,9 +169,12 @@ class Game {
         this.characters.morty.restartCharacter();
         //Remove event of previous stage
         this.stages[this.actualStage].removeListener();
+        //Stop Music previous Stage
+        this.stages[this.actualStage].pauseMusic();
         //Change stage
         this.actualStage += 1;
-
+        // Start Music
+        this.stages[this.actualStage].startMusic();
         //Load event for the next stage and start it
         this.stages[this.actualStage].loadListeners();
         this.stages[this.actualStage].start(
@@ -185,8 +191,6 @@ class Game {
         window.requestAnimationFrame(functAnim);
 
         function animTransitionStage() {
-            console.log(this);
-            console.log("switch");
             
             this.ctxs.ui.fillStyle = "black";
             //left
@@ -278,7 +282,8 @@ class Game {
             this.collisionDetector,
             stage1FctDown,
             stage1FctUp,
-            this.objAssets.ui.background[0]
+            this.objAssets.ui.background[0],
+            "assets/sounds/midstage.mp3"
         );
 
         stage1.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
@@ -293,7 +298,7 @@ class Game {
 
             var rick = this.characters.rick;
             var morty = this.characters.morty;
-
+            var rickIsOut = false;
             var objCollision = this.collisionDetector;
 
             var gradient = ctxs.game.createLinearGradient(0, 0, canvasWidth, 0);
@@ -304,6 +309,7 @@ class Game {
 
             drawCvPart1(ctxs.ui, canvasWidth, canvasHeight);
             drawText(ctxs.ui, 900, 240, "Compétences", "bold 18px Lucida Sans Unicode", null, null);
+
 
             window.requestAnimationFrame(loop);
 
@@ -322,10 +328,16 @@ class Game {
                 /// Make rick disappear if pass portal ///
                 if(!(rick.x > portal.x)){
                     rick.draw(ctxs.game);
+                }else{
+                    if(!rickIsOut){
+                        portal.sound.play();
+                        rickIsOut = true;
+                    }
                 }
                 /// Draw portal ///
                 portal.draw(ctxs.game);
                 if (morty.x > portal.x) {
+                    portal.sound.play();
                     fctStop();
                 } else {
                     window.requestAnimationFrame(loop);
@@ -384,7 +396,8 @@ class Game {
             this.collisionDetector,
             stage2FctDown,
             stage2FctUp,
-            this.objAssets.background.forest[0]
+            this.objAssets.background.forest[0],
+            "music"
 
         );
 
@@ -506,6 +519,7 @@ class Game {
                             scorePlayer += skill.score;
                             visionPlayer += 10 * skill.score;
                             skill.collision = true;
+                            skill.sound.play();
                             if (visionPlayer >= 200) {
                                 if (visionPlayer >= 350) {
                                     if (visionPlayer >= 500) {
@@ -553,6 +567,7 @@ class Game {
                             scorePlayer -= 1;
                         }
                         bomb.explode = true;
+                        bomb.sound.play();
                         if (visionPlayer >= 100) {
                             visionPlayer -= 20;
 
@@ -631,12 +646,15 @@ class Game {
 
                 if (objCollision.passPortal(portalMorty, morty, true)) {
                     trueEndStage = true;
+                    portalMorty.sound.play();
                     fctStop();
 
                 }
                 // make rick disappear if he pass the portal
                 if (portalMorty.x > rick.x) {
                     rick.draw(ctxs.game);
+                }else{
+                    portalMorty.sound.play();
                 }
                 if (rick.y < morty.y) {
                     rick.y += 1.5;
@@ -765,8 +783,8 @@ class Game {
             this.collisionDetector,
             stage3FctDown,
             stage3FctUp,
-            this.objAssets.ui.background[0]
-
+            this.objAssets.ui.background[0],
+            "assets/sounds/midstage.mp3"
         );
 
         stage3.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
@@ -821,12 +839,16 @@ class Game {
 
                 if(!(rick.x > portal.x)){
                     rick.draw(ctxs.game);
+                }else{
+                    portal.sound.play();
                 }
                 morty.draw(ctxs.game);
                 //Draw portal
                 portal.draw(ctxs.game);
 
                 if (morty.x > canvasWidth - 130) {
+                    portal.sound.play();
+
                     fctStop();
                 } else {
                     window.requestAnimationFrame(loop);
@@ -846,6 +868,8 @@ class Game {
                     this.characters.horse.animation.frame = 0;
                     this.characters.horse.velocityY = -15;
                     this.characters.horse.actualJump++;
+                    this.characters.horse.soundJump.currentTime = 0;
+                    this.characters.horse.soundJump.play();
                 }
             }
             event.preventDefault();
@@ -873,7 +897,8 @@ class Game {
             this.collisionDetector,
             stage4FctDown,
             stage4FctUp,
-            this.objAssets.background.western[0]
+            this.objAssets.background.western[0],
+            "assets/sounds/country.mp3"
 
         );
         //Add horse character in stage4
@@ -980,6 +1005,7 @@ class Game {
                     tabExperience.map(function (exp, index) {
                         //Detect Collision
                         if (objCollision.isCollisionElem(horse, exp) && !exp.isCollision) {
+                            exp.sound.play();
                             exp.effectCollision({
                                 type: "horse"
                             })
@@ -1060,6 +1086,7 @@ class Game {
                                 tile.speed = 0;
                                 horse.animation.direction = "stayStill";
                                 decreaseSpeedOver = true;
+                                horse.soundRun.pause();
                             }
                         }
                         if (tile.x + tile.width < 0) {
@@ -1121,10 +1148,13 @@ class Game {
                 /// Draw Rick & Morty ///
                 if (!mortyPassPortal) {
                     morty.draw(ctxs.game);
-
+                }else{
+                    portalEnd.sound.play();
                 }
                 if (!rickPassPortal) {
                     rick.draw(ctxs.game);
+                }else{
+                    portalEnd.sound.play();
                 }
                 /// Draw Grass ///
                 tilesGrass.map(function (tile) {
@@ -1136,6 +1166,7 @@ class Game {
                 tabParralaxBack[8].draw(ctxs.game, canvasWidth, canvasHeight);
                 if (rickPassPortal && mortyPassPortal) {
                     console.log("endStage");
+                    horse.soundRun.pause();
                     fctStop();
                 } else {
                     window.requestAnimationFrame(endLoop);
@@ -1213,7 +1244,8 @@ class Game {
             this.collisionDetector,
             stage5FctDown,
             stage5FctUp,
-            this.objAssets.ui.background[0]
+            this.objAssets.ui.background[0],
+            "assets/sounds/midstage.mp3"
         );
 
         stage5.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
@@ -1303,8 +1335,6 @@ class Game {
                     }
                 }
                 drawMovingCV(ctxs.back, tabElemnentCV, canvasWidth, canvasHeight);
-               /*  ctxs.back.fillStyle = gradient;
-                ctxs.back.fillRect(0, canvasHeight / 3 * 2, canvasWidth, 1); */
                 /// Draw rick and morty ///
                 // fix x of rick to follow morty
                 rick.x = morty.x + 60;
@@ -1316,8 +1346,8 @@ class Game {
         };
         /////////////////////////////////End Stage 5///////////////////////////////////////////////
         /// Add all stages in object game 
-        stages.push(stage1);
-        stages.push(stage2);
+        //stages.push(stage1);
+        //stages.push(stage2);
         stages.push(stage3);
         stages.push(stage4);
         stages.push(stage5);
@@ -1334,7 +1364,8 @@ class Stage {
         collisionDetector,
         fctKeyDown,
         fctKeyUp,
-        transitionImg
+        transitionImg,
+        srcMusic
     ) {
         this.elemStage = elemStage;
         this.elemBack = elemBack;
@@ -1344,6 +1375,14 @@ class Stage {
         this.startStage = false;
         this.collisionDetector = collisionDetector;
         this.transitionImg = new Sprite(transitionImg,0,0,transitionImg.width,transitionImg.height);
+        this.sound = new Audio(srcMusic);
+        this.sound.volume = 0.8;
+
+        this.sound.addEventListener('ended',function(){
+            console.log(this);
+            this.currentTime = 0;
+            this.play();
+        });
 
         this.fctKeyDown = this.fctKeyDown.bind(this);
         this.fctKeyUp = this.fctKeyUp.bind(this);
@@ -1357,5 +1396,11 @@ class Stage {
         //cancel listeners
         window.removeEventListener("keydown", this.fctKeyDown);
         window.removeEventListener("keyup", this.fctKeyUp);
+    }
+    startMusic(){
+        this.sound.play();
+    }
+    pauseMusic(){
+        this.sound.pause();
     }
 }

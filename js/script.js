@@ -35,7 +35,12 @@ document.addEventListener("DOMContentLoaded", function () {
             canvasBack.height,
             ctxs
         );
-        game.startGame();
+        document.getElementById("start-game").addEventListener("click",function(){
+            $("#info-game").show();
+            $("#start-game").hide("slow");
+            showInfoStage(1);
+            game.startGame();
+        });
     }
     loadAssets(initGameClass);
 });
