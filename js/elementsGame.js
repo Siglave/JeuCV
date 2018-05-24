@@ -296,6 +296,7 @@ class Character extends Element {
                 keyIsUp: false
             } //shift
         ];
+        this.soundRun = new Audio("assets/sounds/run.mp3");
     }
     changeImg(img) {
         this.animation = getAnimationCharacter(img);
@@ -362,9 +363,14 @@ class Character extends Element {
                     case 16: //shift
                         this.speed = 5;
                         this.animation.maxTime = 3;
+                        this.soundRun.play();
                         break;
                     default:
                         return;
+                }
+            }else{
+                if(item.keyCode == 16){
+                    this.soundRun.pause();
                 }
             }
         });

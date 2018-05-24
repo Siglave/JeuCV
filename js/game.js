@@ -397,7 +397,7 @@ class Game {
             stage2FctDown,
             stage2FctUp,
             this.objAssets.background.forest[0],
-            "music"
+            "assets/sounds/cycles.mp3"
 
         );
 
@@ -632,7 +632,8 @@ class Game {
             var portalMorty = new Portal(this.elemStage.portal[0], 925, 410, 175, 175);
             portalMorty.setScaleXY(0, 0);
             var trueEndStage = false;
-
+            // allow to start the sound of the portal only once
+            var rickIsOut = false;
             function loopEnd() {
 
                 ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -654,7 +655,10 @@ class Game {
                 if (portalMorty.x > rick.x) {
                     rick.draw(ctxs.game);
                 }else{
-                    portalMorty.sound.play();
+                    if(!rickIsOut){
+                        portalMorty.sound.play();
+                        rickIsOut = true;
+                    }
                 }
                 if (rick.y < morty.y) {
                     rick.y += 1.5;
@@ -818,6 +822,9 @@ class Game {
             drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
             ctxs.ui.fillStyle = "black";
             drawText(ctxs.ui, 810, 260, "Expérience/Diplômes", "bold 18px Lucida Sans Unicode", "start");
+            
+            // allow to start the sound of the portal only once
+            var rickIsOut = false;
             window.requestAnimationFrame(loop);
 
             function loop() {
@@ -840,7 +847,10 @@ class Game {
                 if(!(rick.x > portal.x)){
                     rick.draw(ctxs.game);
                 }else{
-                    portal.sound.play();
+                    if(!rickIsOut){
+                        portal.sound.play();
+                        rickIsOut = true;
+                    }
                 }
                 morty.draw(ctxs.game);
                 //Draw portal
@@ -1346,8 +1356,8 @@ class Game {
         };
         /////////////////////////////////End Stage 5///////////////////////////////////////////////
         /// Add all stages in object game 
-        //stages.push(stage1);
-        //stages.push(stage2);
+        stages.push(stage1);
+        stages.push(stage2);
         stages.push(stage3);
         stages.push(stage4);
         stages.push(stage5);

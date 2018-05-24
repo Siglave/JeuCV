@@ -27,10 +27,8 @@ function showInfoStage(stageToShow){
 
     tabIdStage.map(function(idStageBlock,index){
         if(stageToShow == index+1){
-            //document.getElementById(idStageBlock).style.display = "block";
             $("#"+idStageBlock).show("slow");
         }else{
-            //document.getElementById(idStageBlock).style.display = "none";
             $("#"+idStageBlock).hide();
         }
     });
