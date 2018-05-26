@@ -143,7 +143,7 @@ function loadAssets(callback) {
                 "assets/background/forest/bushes.png",
                 "assets/background/forest/distantTrees.png",
                 "assets/background/forest/tree.png",
-                "assets/background/forest/ground.png"
+                "assets/background/forest/ground.png",
             ],
             western: [
                 "assets/background/western/background.png",
@@ -214,6 +214,8 @@ function loadAssets(callback) {
         ui :{
             background: [
                 "assets/background/paper.png",
+                "assets/background/trianglifyforest.png",
+                "assets/background/trianglifywestern.png"
             ],
         } 
     }
