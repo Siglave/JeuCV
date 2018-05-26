@@ -75,9 +75,8 @@ function createStage1(){
     stage1.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
         /// Show stage info UI ///
         showInfoStage(1);
-        //Background
-        ctxs.back.fillStyle = "white";
-        ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight);
+        /// Change backgound of web site ///
+        changeBackgroundSite("cv");
 
         // Define portal
         var portal = new Portal(this.elemStage.portal, 870, 320, 175, 175);
@@ -193,7 +192,7 @@ function createStageForest(){
         var imgToHide = this.transitionImg;
         var endStage = false;
         /// Change backgound of web site ///
-        changeBacgroundSite("forest");
+        changeBackgroundSite("forest");
         //Background
         this.elemBack.map(function (elem) {
             var s = new Sprite(elem, 0, 0, elem.width, elem.height);
@@ -576,7 +575,7 @@ function createStage3(){
         /// Show stage info UI ///
         showInfoStage(3);
         /// Change backgound web site ///
-        changeBacgroundSite("cv");
+        changeBackgroundSite("cv");
 
         ctxs.back.fillStyle = "white";
         ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight);
@@ -637,9 +636,8 @@ function createStage3(){
             //Draw portal
             portal.draw(ctxs.game);
 
-            if (morty.x > canvasWidth - 130) {
+            if (morty.x > portal.x) {
                 portal.sound.play();
-
                 fctStop();
             } else {
                 window.requestAnimationFrame(loop);
@@ -706,7 +704,7 @@ function createStageWestern(){
         /// Show stage info UI ///
         showInfoStage(4);
         /// Change background web site ///
-        changeBacgroundSite("western");
+        changeBackgroundSite("western");
         //Define objectCollision
         var objCollision = this.collisionDetector;
         //Define speed for each background
@@ -1045,7 +1043,7 @@ function createStage5(){
         /// Show stage info UI ///
         showInfoStage(5);
         /// Change background web site ///
-        changeBacgroundSite("cv");
+        changeBackgroundSite("cv");
 
         ctxs.back.fillStyle = "white";
         ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight);

@@ -2,7 +2,7 @@ function downloadPdf(){
     document.getElementById("pdf-cv").click();
 }
 
-function changeBacgroundSite(choiceBack){
+function changeBackgroundSite(choiceBack){
     var mainPage = document.getElementById("main-page");
     switch (choiceBack) {
         case "forest":

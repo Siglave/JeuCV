@@ -8,6 +8,13 @@ html {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+.background-start {
+    background-image: url("../assets/background/trianglifystart.png");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .background-cv {
     background-image: url("../assets/background/paper.png");
     height: 100%;
@@ -40,21 +47,29 @@ html {
     left: 50%;
     font-size: 50px;
     font-weight: 100;
-    margin-left: -100px;
+    margin-left: -209px;
     padding: 1%;
-    border-top: 2px solid #065488;
+    /* border-top: 2px solid #065488;
     border-bottom: 2px solid #065488;
     border-right: 2px solid transparent;
-    border-left: 2px solid transparent;
+    border-left: 2px solid transparent; */
+    background: transparent;
+    border: 5px solid #245677;
     color: #065488;
+    border-radius: 10px;
+    text-shadow: 0px -2px #D1B358;
+    cursor: pointer;
 }
 #start-game:hover{
-    border-top: 2px solid transparent;
+/*     border-top: 2px solid transparent;
     border-bottom: 2px solid transparent;
     border-right: 2px solid #065488;
-    border-left: 2px solid #065488;
-    font-weight: bold;
-    font-style: oblique;
+    border-left: 2px solid #065488; */
+    /* font-weight: bold;
+ */    transform: translate(5px,5px);
+  -webkit-transform: translate(5px,5px);
+	border: 1px solid;
+    /* font-style: oblique; */
 }
 
 /***************/
@@ -90,9 +105,6 @@ canvas {
     width: 300px;
     position: absolute;
     z-index: 4;
-/*     background: linear-gradient(to bottom right, #00b901, #8fe938);
- */ 
-    /* background: transparent; */
     background-color: rgba(255,255,255,0.3);
     border-right: 5px solid black;
     border-bottom:5px solid black;
