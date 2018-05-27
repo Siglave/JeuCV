@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         );
         document.getElementById("start-game").addEventListener("click",function(){
             $("#info-game").show();
-            $("#start-game").hide("slow");
+            $("#first-page").hide("slow");
             showInfoStage(1);
             game.startGame();
         });

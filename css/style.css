@@ -49,27 +49,17 @@ html {
     font-weight: 100;
     margin-left: -209px;
     padding: 1%;
-    /* border-top: 2px solid #065488;
-    border-bottom: 2px solid #065488;
-    border-right: 2px solid transparent;
-    border-left: 2px solid transparent; */
     background: transparent;
     border: 5px solid #245677;
     color: #065488;
     border-radius: 10px;
-    text-shadow: 0px -2px #D1B358;
+    text-shadow: 2px 2px #ddd165;
     cursor: pointer;
 }
 #start-game:hover{
-/*     border-top: 2px solid transparent;
-    border-bottom: 2px solid transparent;
-    border-right: 2px solid #065488;
-    border-left: 2px solid #065488; */
-    /* font-weight: bold;
- */    transform: translate(5px,5px);
-  -webkit-transform: translate(5px,5px);
+    transform: translate(5px,5px);
+    -webkit-transform: translate(5px,5px);
 	border: 1px solid;
-    /* font-style: oblique; */
 }
 
 /***************/
