@@ -119,8 +119,6 @@ class Game {
             canvasWidth,
             canvasHeight
         );
-        /*         console.log(objAssets.characters.rick[0][0]);
-         */
         this.characters = {
             rick: new Character(
                 objAssets.characters.rick[0],
@@ -155,11 +153,6 @@ class Game {
        
     }
     switchStage() {
-        //console.log("autreStage");
-        console.log("actuStage");
-        console.log(this.actualStage);
-        console.log(this);
-
         //Clear all Canvas
         this.ctxs.back.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
         this.ctxs.game.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
@@ -191,13 +184,10 @@ class Game {
         window.requestAnimationFrame(functAnim);
 
         function animTransitionStage() {
-            
+            // Draw transition between stage
             this.ctxs.ui.fillStyle = "black";
             //left
             this.ctxs.ui.clearRect(valuexL, 0, this.canvasWidth / 2, this.canvasHeight);
-            //this.ctxs.ui.fillRect(valuexL, 0, this.canvasWidth / 2, this.canvasHeight);
-/*             console.log(this.objAssets.ui);
- */            
             this.stages[this.actualStage].transitionImg.draw(this.ctxs.ui,valuexL,0,this.canvasWidth / 2, this.canvasHeight);
             //right
             this.ctxs.ui.clearRect(valuexR, 0, this.canvasWidth / 2, this.canvasHeight);
@@ -207,7 +197,6 @@ class Game {
             valuexR += 5;
             if (valuexL * -1 < this.canvasWidth / 2) {
                 window.requestAnimationFrame(functAnim);
-
             }
 
         };
@@ -230,7 +219,6 @@ class Game {
         stages.push(stage3);
         stages.push(stage4);
         stages.push(stage5);
-        console.log(stages);
         
         return stages;
     }
@@ -259,7 +247,6 @@ class Stage {
         this.sound.volume = 0.8;
 
         this.sound.addEventListener('ended',function(){
-            console.log(this);
             this.currentTime = 0;
             this.play();
         });

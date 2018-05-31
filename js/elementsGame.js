@@ -590,8 +590,6 @@ class TextExperience extends Element {
             case "canvas":
                 break;
             case "horse":
-                console.log("horse");
-
                 break;
             default:
                 break;

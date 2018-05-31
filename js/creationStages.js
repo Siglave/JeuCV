@@ -4,6 +4,18 @@ function fctMapKeyCode(elem){
         elem.keyIsUp = true;
     }
 }
+
+var fctMapKeyDown = function (elem,charac) {            
+    if (elem.keyCode == event.keyCode) {
+        this.characters[charac].animation.frame = 0;
+        this.characters[charac].animation.direction = "stayStill";
+        elem.keyIsUp = false;
+        if (event.keyCode == 16) {
+            this.characters[charac].animation.maxTime = 10;
+            this.characters[charac].speed = 2;
+        }
+    }
+};
 ////////////////////////////////
 function createStage1(){    
     var stage1FctDown = function (event) {
@@ -22,41 +34,14 @@ function createStage1(){
         if (event.defaultPrevented) {
             return;
         }
-        var fctMap = function (elem, character) {
-            if (elem.keyCode == event.keyCode) {
-                character.animation.frame = 0;
-                character.animation.direction = "stayStill";
-                elem.keyIsUp = false;
-                if (event.keyCode == 16) {
-                    character.animation.maxTime = 10;
-                    character.speed = 2;
-                }
-            }
-        };
-        this.characters.rick.arrowMove.map(elem => {
-            if (elem.keyCode == event.keyCode) {
-                this.characters.rick.animation.frame = 0;
-                this.characters.rick.animation.direction = "stayStill";
-                elem.keyIsUp = false;
-                if (event.keyCode == 16) {
-                    this.characters.rick.animation.maxTime = 10;
-                    this.characters.rick.speed = 2;
-                }
-            }
+        var fctMapbind = fctMapKeyDown.bind(this);
+    
+        this.characters.rick.arrowMove.map(function(elem){
+            fctMapbind(elem,"rick");            
         });
-        this.characters.morty.arrowMove.map(elem => {
-            if (elem.keyCode == event.keyCode) {
-                this.characters.morty.animation.frame = 0;
-                this.characters.morty.animation.direction = "stayStill";
-                elem.keyIsUp = false;
-                if (event.keyCode == 16) {
-                    this.characters.morty.animation.maxTime = 10;
-                    this.characters.morty.speed = 2;
-                }
-            }
+        this.characters.morty.arrowMove.map(function(elem){
+            fctMapbind(elem,"morty");
         });
-        console.log("from1");
-
         event.preventDefault();
     };
     var elemStage = {
@@ -146,19 +131,11 @@ function createStageForest(){
         if (event.defaultPrevented) {
             return;
         }
-        this.characters.morty.arrowMove.map(elem => {
-            if (elem.keyCode == event.keyCode) {
-                this.characters.morty.animation.frame = 0;
-                this.characters.morty.animation.direction = "stayStill";
-                elem.keyIsUp = false;
-                if (event.keyCode == 16) {
-                    this.characters.morty.animation.maxTime = 10;
-                    this.characters.morty.speed = 2;
-                }
-            }
+        var fctMapbind = fctMapKeyDown.bind(this);
+        this.characters.morty.arrowMove.map(function(elem){
+            fctMapbind(elem,"morty");
         });
-        console.log("from2");
-
+        
         event.preventDefault();
     };
     var elemStage2 = {
@@ -410,8 +387,6 @@ function createStageForest(){
                 window.requestAnimationFrame(loopGame);
             }
         }
-        console.log(this.elemStage);
-
         var portalMorty = new Portal(this.elemStage.portal[0], 925, 410, 175, 175);
         portalMorty.setScaleXY(0, 0);
         var trueEndStage = false;
@@ -553,8 +528,6 @@ function createStage3(){
                 }
             }
         });
-        console.log("from3");
-
         event.preventDefault();
     };
     var elemStage3 = {
@@ -960,7 +933,6 @@ function createStageWestern(){
             ///Draw this background to appear in front of the horse ///
             tabParralaxBack[8].draw(ctxs.game, canvasWidth, canvasHeight);
             if (rickPassPortal && mortyPassPortal) {
-                console.log("endStage");
                 horse.soundRun.pause();
                 fctStop();
             } else {

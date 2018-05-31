@@ -1,5 +1,3 @@
-// http://spritedatabase.net/file/21543/Horse
-
 class Sprite {
     constructor(img, sx, sy, sWidth, sHeight) {
         this.img = img;
@@ -18,7 +16,6 @@ function getPortalElement(img) {
 }
 
 function getAnimationCharacter(img) {
-    // console.log(srcImg);
     var sWidth = 120;
     var sHeight = 158;
     var interval = 4.5;
