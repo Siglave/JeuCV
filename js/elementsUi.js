@@ -1,10 +1,10 @@
-function drawScore(ctx, x, y, text, canvasWidth) {
+export function drawScore(ctx, x, y, text, canvasWidth) {
     ctx.font = "40px Verdana";
     ctx.fillStyle = "rgb(5, 111, 173)";
     ctx.fillText(text + " / 50", x, y);
 }
 
-function drawText(ctx, x, y, text, font, textAlign) {
+export function drawText(ctx, x, y, text, font, textAlign) {
     if (font) {
         ctx.font = font;
     }
@@ -14,7 +14,7 @@ function drawText(ctx, x, y, text, font, textAlign) {
     ctx.fillText(text, x, y);
 }
 
-function drawMultipleText(ctx, arrayText) {
+export function drawMultipleText(ctx, arrayText) {
     ctx.fillStyle = "black";
     ctx.textAlign = "left";
     arrayText.map(function (elem) {
@@ -22,7 +22,7 @@ function drawMultipleText(ctx, arrayText) {
     });
 }
 
-function getCvPart1(canvasWidth, canvasHeight) {
+export function getCvPart1(canvasWidth, canvasHeight) {
     return [{
             x: 30,
             y: 30,
@@ -32,18 +32,12 @@ function getCvPart1(canvasWidth, canvasHeight) {
         {
             x: 30,
             y: 50,
-            text: "Tél : 06 06 06 06 06",
+            text: "Mail : pierrerouzaud18@gmail.com",
             font: null
         },
         {
             x: 30,
             y: 70,
-            text: "Mail : test@gmail.com",
-            font: null
-        },
-        {
-            x: 30,
-            y: 90,
             text: "Age : 22 ans",
             font: null
         },
@@ -75,7 +69,7 @@ function getCvPart1(canvasWidth, canvasHeight) {
     ];
 }
 
-function getSkillsCv(canvasWidth,canvasHeight){
+export function getSkillsCv(canvasWidth,canvasHeight){
     return [{
         x: 30,
         y: 320,
@@ -158,7 +152,7 @@ function getSkillsCv(canvasWidth,canvasHeight){
 ];
 }
 
-function getEndCV(canvasWidth,canvasHeight){
+export function getEndCV(canvasWidth,canvasHeight){
     return [
         {
             x: 30,
@@ -235,17 +229,17 @@ function getEndCV(canvasWidth,canvasHeight){
         },
     ]
 }
-function drawCvPart1(ctx, canvasWidth, canvasHeight) {
+export function drawCvPart1(ctx, canvasWidth, canvasHeight) {
     var textToDraw = getCvPart1(canvasWidth, canvasHeight);
     drawMultipleText(ctx, textToDraw);
 }
 
-function drawSkillsCv(ctx, canvasWidth, canvasHeight) {
+export function drawSkillsCv(ctx, canvasWidth, canvasHeight) {
     var textToDraw = getSkillsCv(canvasWidth,canvasHeight);
     drawMultipleText(ctx, textToDraw);
 }
 
-function drawMovingCV(ctx,tabCv,canvasWidth,canvasHeight){
+export function drawMovingCV(ctx,tabCv,canvasWidth,canvasHeight){
     tabCv.map(function(elemText){
         elemText.y -= 0.3;
         if (elemText.y < 0) {

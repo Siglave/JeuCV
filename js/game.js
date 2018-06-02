@@ -1,6 +1,10 @@
 "use strict";
 
-class CollisionDetector {
+import {Character} from "./elementsGame";
+import {Sprite} from "./sprite";
+import {createStage1,createStage3,createStage5,createStageForest,createStageWestern} from "./creationStages";
+
+export class CollisionDetector {
     constructor(canvasWidth, canvasHeight) {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
@@ -109,7 +113,7 @@ class CollisionDetector {
         }
     }
 }
-class Game {
+export class Game {
     constructor(objAssets, canvasWidth, canvasHeight, ctxs) {
         this.ctxs = ctxs; // obj ctxs {ui:ctx,game:ctx,back:ctx}
         this.objAssets = objAssets;
@@ -224,7 +228,7 @@ class Game {
     }
 }
 
-class Stage {
+export class Stage {
     constructor(
         elemStage,
         elemBack,

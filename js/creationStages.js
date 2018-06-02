@@ -1,11 +1,51 @@
+import {
+    Stage
+} from "./game";
+import {
+    Portal,
+    Cloud,
+    Bomb,
+    Horse,
+    createSkillOrBomb,
+    createTextExperience
+} from "./elementsGame";
+import {
+    BackParallax,
+    Tile
+} from "./elementsBack";
+import {
+    drawCvPart1,
+    drawSkillsCv,
+    drawScore,
+    drawMovingCV,
+    drawText,
+    getCvPart1,
+    getSkillsCv,
+    getEndCV
+} from "./elementsUi";
+import {
+    showInfoStage,
+    changeBackgroundSite,
+    downloadPdf
+} from "./siteScript";
+import {
+    randomNumber,
+    clearCircle
+} from "./utilityCanvas";
+import {
+    Sprite
+} from "./sprite";
+
+
+
 // user interaction functions //
-function fctMapKeyCode(elem){
+function fctMapKeyCode(elem) {
     if (elem.keyCode == event.keyCode) {
         elem.keyIsUp = true;
     }
 }
 
-function fctMapKeyUp(elem,charac) {            
+function fctMapKeyUp(elem, charac) {
     if (elem.keyCode == event.keyCode) {
         this.characters[charac].animation.frame = 0;
         this.characters[charac].animation.direction = "stayStill";
@@ -17,22 +57,22 @@ function fctMapKeyUp(elem,charac) {
     }
 };
 
-function keyUpRickAndMorty(event){
+function keyUpRickAndMorty(event) {
     if (event.defaultPrevented) {
         return;
     }
     var fctMapbind = fctMapKeyUp.bind(this);
 
-    this.characters.rick.arrowMove.map(function(elem){
-        fctMapbind(elem,"rick");            
+    this.characters.rick.arrowMove.map(function (elem) {
+        fctMapbind(elem, "rick");
     });
-    this.characters.morty.arrowMove.map(function(elem){
-        fctMapbind(elem,"morty");
+    this.characters.morty.arrowMove.map(function (elem) {
+        fctMapbind(elem, "morty");
     });
     event.preventDefault();
 }
 ////////////////////////////////
-function createStage1(){    
+export function createStage1() {
     var stage1FctDown = function (event) {
         if (event.defaultPrevented) {
             return;
@@ -88,10 +128,10 @@ function createStage1(){
 
             morty.draw(ctxs.game);
             /// Make rick disappear if pass portal ///
-            if(!(rick.x > portal.x)){
+            if (!(rick.x > portal.x)) {
                 rick.draw(ctxs.game);
-            }else{
-                if(!rickIsOut){
+            } else {
+                if (!rickIsOut) {
                     portal.sound.play();
                     rickIsOut = true;
                 }
@@ -110,7 +150,7 @@ function createStage1(){
     return stage1;
 }
 
-function createStageForest(){
+export function createStageForest() {
     var stage2FctDown = function (event) {
         if (event.defaultPrevented) {
             return;
@@ -124,10 +164,10 @@ function createStageForest(){
             return;
         }
         var fctMapKeyUpBind = fctMapKeyUp.bind(this);
-        this.characters.morty.arrowMove.map(function(elem){
-            fctMapKeyUpBind(elem,"morty");
+        this.characters.morty.arrowMove.map(function (elem) {
+            fctMapKeyUpBind(elem, "morty");
         });
-        
+
         event.preventDefault();
     };
     var elemStage2 = {
@@ -138,7 +178,7 @@ function createStageForest(){
         bomb: this.objAssets.elements.bomb,
         explosion: this.objAssets.effects.explosion,
         portal: this.objAssets.elements.portal,
-        uiInfo : this.objAssets.ui.elementInfo
+        uiInfo: this.objAssets.ui.elementInfo
     }
     var elemBackStage2 = this.objAssets.background.forest;
     var stage2 = new Stage(
@@ -233,7 +273,7 @@ function createStageForest(){
             /// Hide parts of the game ///
             if (visionPlayer < 550) {
                 /// Draw the img on top of the game ///
-                imgToHide.draw(ctxs.ui,0,0,canvasWidth,canvasHeight);
+                imgToHide.draw(ctxs.ui, 0, 0, canvasWidth, canvasHeight);
                 /// to see morty ///
                 clearCircle(ctxs.ui, visionPlayer, morty.x, morty.y, 30, 30);
                 /// to see rick ///
@@ -348,9 +388,9 @@ function createStageForest(){
                             bombs.splice(index, 1);
                         }, 0);
                     } else {
-                        if(bomb.x < bomb.distanceFall){
+                        if (bomb.x < bomb.distanceFall) {
                             bomb.draw(ctxs.game);
-                        }else{
+                        } else {
                             bomb.draw(ctxs.ui);
 
                         }
@@ -389,6 +429,7 @@ function createStageForest(){
         var trueEndStage = false;
         // allow to start the sound of the portal only once
         var rickIsOut = false;
+
         function loopEnd() {
 
             ctxs.game.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -409,8 +450,8 @@ function createStageForest(){
             // make rick disappear if he pass the portal
             if (portalMorty.x > rick.x) {
                 rick.draw(ctxs.game);
-            }else{
-                if(!rickIsOut){
+            } else {
+                if (!rickIsOut) {
                     portalMorty.sound.play();
                     rickIsOut = true;
                 }
@@ -422,7 +463,7 @@ function createStageForest(){
                 if (morty.x + morty.width * 2 >= portalMorty.x) {
                     morty.x -= morty.speed * 2;
                 }
-            } else {// Rick same level as morty
+            } else { // Rick same level as morty
                 // Make portal appear
                 if (portalMorty.scaleX < 0.4 || portalMorty.scaleY < 1) {
                     if (portalMorty.scaleX < 0.4) {
@@ -431,7 +472,7 @@ function createStageForest(){
                     if (portalMorty.scaleY < 1) {
                         portalMorty.scaleY += 0.01;
                     }
-                } else {// Portal completely appear
+                } else { // Portal completely appear
                     // Move rick toward the portal
                     rick.arrowMove.map(function (elem) {
                         if (elem.keyCode == 39 && !elem.keyIsUp) {
@@ -478,8 +519,8 @@ function createStageForest(){
     return stage2;
 }
 
-function createStage3(){
-    
+export function createStage3() {
+
     var stage3FctDown = function (event) {
         if (event.defaultPrevented) {
             return;
@@ -492,7 +533,7 @@ function createStage3(){
 
         event.preventDefault();
     };
-    
+
     var elemStage3 = {
         portal: this.objAssets.elements.portal[0]
     };
@@ -533,7 +574,7 @@ function createStage3(){
         drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
         ctxs.ui.fillStyle = "black";
         drawText(ctxs.ui, 810, 260, "Expérience/Diplômes", "bold 18px Lucida Sans Unicode", "start");
-        
+
         // allow to start the sound of the portal only once
         var rickIsOut = false;
         window.requestAnimationFrame(loop);
@@ -553,10 +594,10 @@ function createStage3(){
             drawText(ctxs.ui, 800, 260, "Expérience/Diplômes", "bold 18px Lucida Sans Unicode", "start");
 
 
-            if(!(rick.x > portal.x)){
+            if (!(rick.x > portal.x)) {
                 rick.draw(ctxs.game);
-            }else{
-                if(!rickIsOut){
+            } else {
+                if (!rickIsOut) {
                     portal.sound.play();
                     rickIsOut = true;
                 }
@@ -576,7 +617,7 @@ function createStage3(){
     return stage3;
 }
 
-function createStageWestern(){
+export function createStageWestern() {
     var stage4FctDown = function (event) {
         if (event.defaultPrevented) {
             return;
@@ -630,6 +671,7 @@ function createStageWestern(){
     stage4.characters.horse.animation.direction = "run";
 
     stage4.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
+        console.log("salut");
         /// Show stage info UI ///
         showInfoStage(4);
         /// Change background web site ///
@@ -639,9 +681,12 @@ function createStageWestern(){
         //Define speed for each background
         var tabSpeed = [0, 0, 0, 0.3, 1, 0.5, 1.5, 1.8, 3];
         var tabParralaxBack = [];
+        console.log("salut2");
         this.elemBack.western.map(function (elem, index) {
             tabParralaxBack.push(new BackParallax(elem, 0, 0, elem.width, elem.height, tabSpeed[index]));
         });
+        console.log("salut3");
+
         //Create Tiles Grass
         var tilesGrass = [
             new Tile(this.elemBack.tilesGrass[0], 0, 530, 360, 120, 4),
@@ -651,7 +696,7 @@ function createStageWestern(){
         ];
         //Create Experience elements
         var tabExperience = [];
-        var tabText = ["Dut Informatique, Paris Descartes", "Ifocop, Formation Dev JS", "Dev Web, Institut de France", "Dev Web Le Smartsitting"];
+        var tabText = ["Dut Informatique, Paris Descartes", "Ifocop, Formation Dev JS", "Dev Web, Institut de France", "Dev Web, Le Smartsitting"];
         // Every 3 sec create new TextExperience
         var idIntervalExp = setInterval(function () {
             tabExperience.push(createTextExperience(ctxs.game, canvasWidth));
@@ -693,11 +738,12 @@ function createStageWestern(){
 
         var stopMainLoop = false;
 
-
+       
         //Start loop
         window.requestAnimationFrame(loop);
 
         function loop() {
+            console.log("salut4");
             if (!stopMainLoop) {
 
                 //Clear background ////
@@ -876,12 +922,12 @@ function createStageWestern(){
             /// Draw Rick & Morty ///
             if (!mortyPassPortal) {
                 morty.draw(ctxs.game);
-            }else{
+            } else {
                 portalEnd.sound.play();
             }
             if (!rickPassPortal) {
                 rick.draw(ctxs.game);
-            }else{
+            } else {
                 portalEnd.sound.play();
             }
             /// Draw Grass ///
@@ -904,7 +950,7 @@ function createStageWestern(){
     return stage4;
 }
 
-function createStage5(){
+export function createStage5() {
     var stage5FctDown = function (event) {
         if (event.defaultPrevented) {
             return;
@@ -959,7 +1005,7 @@ function createStage5(){
             x: 690,
             y: 350,
             timeCvDownloaded: 0,
-            text: "Download CV Here !",
+            text: "Télécharger le CV ici !",
             font: "bold 24px Lucida Sans Unicode",
             align: "start",
             color: "black",
@@ -995,19 +1041,19 @@ function createStage5(){
                     downloadPdf();
                     pdfText.isDownload = true;
                     pdfText.color = "green";
-                    pdfText.text = "Cv Downloaded !";
+                    pdfText.text = "CV Téléchargé !";
                     pdfText.timeCvDownloaded++;
                 }
             } else {
                 if (pdfText.isDownload) {
                     pdfText.isDownload = false;
-                    pdfText.text = "Download CV Here!";
-                    if(!(pdfText.timeCvDownloaded>3)){
-                        for(var i = 0; i <pdfText.timeCvDownloaded;i++){
-                            pdfText.text = "Re"+pdfText.text;
+                    pdfText.text = "Télécharger le CV ici !";
+                    if (!(pdfText.timeCvDownloaded > 3)) {
+                        for (var i = 0; i < pdfText.timeCvDownloaded; i++) {
+                            pdfText.text = "Re" + pdfText.text;
                         }
-                    }else{
-                        pdfText.text = "Stop doing that !";                            
+                    } else {
+                        pdfText.text = "Stop !";
                     }
 
                 }

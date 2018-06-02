@@ -1,6 +1,18 @@
 "use strict";
+import {
+    getAnimationBomb,
+    getAnimationCharacter,
+    getAnimationHorse,
+    Sprite
+} from "./sprite";
+import {
+    randomNumber
+} from "./utilityCanvas";
+import {
+    drawText
+} from "./elementsUi";
 
-class Element {
+export class Element {
     constructor(x, y, width, height) {
         this.x = x;
         this.y = y;
@@ -15,7 +27,7 @@ class Element {
     }
 }
 
-class Portal extends Element {
+export class Portal extends Element {
     constructor(img, x, y, width, height) {
         super(x, y, width, height);
         this.img = new Sprite(img, 2483, 329, 670, 670);
@@ -55,7 +67,7 @@ class Portal extends Element {
     }
 }
 
-class Cloud extends Element {
+export class Cloud extends Element {
     constructor(img, x, y, width, height) {
         super(x, y, width, height);
         this.img = new Sprite(img, 0, 0, img.width, img.height);
@@ -106,7 +118,7 @@ class Cloud extends Element {
     }
 }
 
-class Skill extends Element {
+export class Skill extends Element {
     constructor(img, x, y, width, height, distanceFall) {
         super(x, y, width, height);
         this.img = new Sprite(img, 0, 0, img.width, img.height);
@@ -143,7 +155,7 @@ class Skill extends Element {
     }
 
 }
-class Bomb extends Element {
+export class Bomb extends Element {
     constructor(imgBomb, imgExplosion, x, y, width, height, distanceFall) {
         super(x, y, width, height);
         this.speed = 1;
@@ -196,13 +208,13 @@ class Bomb extends Element {
     }
 }
 
-function createSkillOrBomb(imgsSkill, imgBomb, imgExplosion, cloud, canvasWidth) {
+export function createSkillOrBomb(imgsSkill, imgBomb, imgExplosion, cloud, canvasWidth) {
     var objRet = {
         type: null,
         img: null
     };
     var score = 1;
-    switch (randomNumber(0, 40)) {
+    switch (randomNumber(0, 26)) {
         case 0:
         case 1:
         case 2:
@@ -271,7 +283,7 @@ function createSkillOrBomb(imgsSkill, imgBomb, imgExplosion, cloud, canvasWidth)
 
 }
 
-class Character extends Element {
+export class Character extends Element {
     constructor(img, x, y, width, height) {
         super(x, y, width, height);
         this.animation = getAnimationCharacter(img);
@@ -356,8 +368,8 @@ class Character extends Element {
                     default:
                         return;
                 }
-            }else{
-                if(item.keyCode == 16){
+            } else {
+                if (item.keyCode == 16) {
                     this.soundRun.pause();
                 }
             }
@@ -414,7 +426,7 @@ class Character extends Element {
     }
 }
 
-class Horse extends Element {
+export class Horse extends Element {
     constructor(img, x, y, width, height) {
         super(x, y, width, height);
         this.animation = getAnimationHorse(img);
@@ -435,7 +447,7 @@ class Horse extends Element {
         ];
         this.soundRun = new Audio("assets/sounds/runhorse.mp3");
         this.soundRun.volume = 0.3;
-        this.soundRun.addEventListener('ended',function(){
+        this.soundRun.addEventListener('ended', function () {
             this.currentTime = 0;
             this.play();
         });
@@ -484,8 +496,8 @@ class Horse extends Element {
                 this.actualJump = 0;
                 this.y = this.baseY;
             }
-        }else{
-            if(this.animation.direction == "run"){
+        } else {
+            if (this.animation.direction == "run") {
                 this.soundRun.play();
             }
         }
@@ -545,7 +557,7 @@ class Horse extends Element {
 
     }
 }
-class TextExperience extends Element {
+export class TextExperience extends Element {
     constructor(text, x, y, width, height) {
         super(x, y, width, height);
         this.text = text;
@@ -588,7 +600,7 @@ class TextExperience extends Element {
     }
 }
 
-function createTextExperience(ctx, canvasWidth) {
+export function createTextExperience(ctx, canvasWidth) {
     var tabText = ["Dut Informatique, Paris Descartes", "Ifocop, Dev Full Stack JS", "Dev Web, Institut de France", "Dev Web Le Smartsitting"];
     var selectedIndex = randomNumber(0, tabText.length - 1);
     return new TextExperience(

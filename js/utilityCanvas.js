@@ -1,4 +1,4 @@
-function clearCircle(ctx,radius,x,y,intervalX,intervalY){
+export function clearCircle(ctx,radius,x,y,intervalX,intervalY){
     ctx.save();
     ctx.beginPath();
     ctx.arc(x+intervalX, y+intervalY, radius, 0, 2*Math.PI, true);
@@ -7,6 +7,6 @@ function clearCircle(ctx,radius,x,y,intervalX,intervalY){
     ctx.restore();
 }
 
-function randomNumber(min, max) {
+export function randomNumber(min, max) {
 	return Math.floor(Math.random() * (max - min + 1) + min);
 }

@@ -1,4 +1,4 @@
-class Sprite {
+export class Sprite {
     constructor(img, sx, sy, sWidth, sHeight) {
         this.img = img;
         this.sX = sx;
@@ -11,11 +11,11 @@ class Sprite {
     }
 }
 
-function getPortalElement(img) {
+export function getPortalElement(img) {
     return new Sprite(img, 2483, 329, 670, 670);
 }
 
-function getAnimationCharacter(img) {
+export function getAnimationCharacter(img) {
     var sWidth = 120;
     var sHeight = 158;
     var interval = 4.5;
@@ -38,7 +38,7 @@ function getAnimationCharacter(img) {
     return objAnimation;
 }
 
-function getAnimationBomb(img, imgExplosion) {
+export function getAnimationBomb(img, imgExplosion) {
     return {
         frame: 0,
         maxTime: 10,
@@ -52,7 +52,7 @@ function getAnimationBomb(img, imgExplosion) {
     }
 }
 
-function getAnimationExplosion(img) {
+export function getAnimationExplosion(img) {
     return {
         frame: 0,
         maxTime: 3,
@@ -74,7 +74,7 @@ function getAnimationExplosion(img) {
     }
 }
 
-function getAnimationHorse(img) {
+export function getAnimationHorse(img) {
     var jumpSprites = [];
     var runSprites = [];
     var pointerImgX = 960;
@@ -130,7 +130,7 @@ function getNumberTabAssets(assets) {
     return numberAttr;
 }
 
-function loadAssets(callback) {
+export function loadAssets(callback) {
     var assetsSrc = {
         background: {
             forest: [

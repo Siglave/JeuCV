@@ -1,4 +1,7 @@
-class BackParallax extends Element{
+import {Sprite} from "./sprite";
+import {Element} from "./elementsGame";
+
+export class BackParallax extends Element{
     constructor(img,x,y,width,height,speed){
         super(x, y, width, height);
         this.img = new Sprite(img, 0, 0, img.width, img.height);
@@ -21,7 +24,7 @@ class BackParallax extends Element{
     }
 }
 
-class Tile extends Element{
+export class Tile extends Element{
     constructor(img,x,y,width,height,speed){
         super(x,y,width,height);
         this.img = new Sprite(img, 0, 0, img.width, img.height);

@@ -1,4 +1,8 @@
 "use strict";
+import {loadAssets} from "./sprite";
+import {Game} from "./game";
+import {showInfoStage} from "./siteScript";
+
 /// Create Polyfill to add requestAnimationFrame for ie9
 (function() {
     if (!window.requestAnimationFrame){
@@ -9,7 +13,6 @@
         };
     }
 }());
-
 
 document.addEventListener("DOMContentLoaded", function () {
     function initGameClass(objAssets) {
@@ -38,5 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
             game.startGame();
         });
     }
+    console.log("Pour voir le code : https://github.com/Siglave/JeuCV :p");
+    
     loadAssets(initGameClass);
 });

@@ -1,8 +1,8 @@
-function downloadPdf(){
+export function downloadPdf(){
     document.getElementById("pdf-cv").click();
 }
 
-function changeBackgroundSite(choiceBack){
+export function changeBackgroundSite(choiceBack){
     var mainPage = document.getElementById("main-page");
     switch (choiceBack) {
         case "forest":
@@ -22,7 +22,7 @@ function changeBackgroundSite(choiceBack){
     }
 }
 // hide all panel expect the one pass in parameter
-function showInfoStage(stageToShow){
+export function showInfoStage(stageToShow){
     var tabIdStage = ["stage-one","stage-two","stage-three","stage-four","stage-five"];
 
     tabIdStage.map(function(idStageBlock,index){
