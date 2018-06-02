@@ -1,6 +1,5 @@
 function drawScore(ctx, x, y, text, canvasWidth) {
     ctx.font = "40px Verdana";
-    // Fill with gradient
     ctx.fillStyle = "rgb(5, 111, 173)";
     ctx.fillText(text + " / 50", x, y);
 }

@@ -1,17 +1,13 @@
 "use strict";
 /// Create Polyfill to add requestAnimationFrame for ie9
 (function() {
-    if (!window.requestAnimationFrame)
+    if (!window.requestAnimationFrame){
         window.requestAnimationFrame = function(callback, element) {
             return this.window.setTimeout(function(){
                 callback();
             },16);
         };
-
-    if (!window.cancelAnimationFrame)
-        window.cancelAnimationFrame = function(id) {
-            clearTimeout(id);
-        };
+    }
 }());
 
 

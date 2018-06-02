@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/jquery.min.js"></script>
+    <script src="lib/jquery.min.js"></script>
     <script src="js/utilityCanvas.js"></script>
     <script src="js/elementsUi.js"></script>
     <script src="js/elementsGame.js"></script>
@@ -23,17 +23,16 @@
 <body>
     <div id="main-page" class="background-start">
         <a class="link link-git" href="https://github.com/Siglave/JeuCV" target="_blank">
-            <img class="img-git" src="assets/ui/github.png" alt="Icon github">
+            <img class="img-link" src="assets/ui/github.png" alt="Icon github">
         </a>
-        <a class="link link-cv" href="rouzaudPierreDevJs.pdf" download>
-            <img class="img-pdf" src="assets/ui/pdf.png" alt="Icon pdf">
+        <a id="pdf-cv" class="link link-cv" href="rouzaudPierreDevJs.pdf" download>
+            <img class="img-link" src="assets/ui/pdf.png" alt="Icon pdf">
         </a>
         <div id="first-page">
             <h1 style="margin: 0; color: #065488;">Développeur Full Stack JS</h1>
             <h1 style="margin: 0; color: #065488;">Rouzaud Pierre</h1>
             <button id="start-game" type="button">Découvrire le CV</button>
         </div>
-        <a id="pdf-cv" href="rouzaudPierreDevJs.pdf" download style="display: none"></a>
         <div id="game-cv">
             <canvas id="game-background" width="1000" height="700"></canvas>
             <canvas id="game-canvas" width="1000" height="700"></canvas>

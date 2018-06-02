@@ -5,7 +5,7 @@ function fctMapKeyCode(elem){
     }
 }
 
-var fctMapKeyDown = function (elem,charac) {            
+function fctMapKeyUp(elem,charac) {            
     if (elem.keyCode == event.keyCode) {
         this.characters[charac].animation.frame = 0;
         this.characters[charac].animation.direction = "stayStill";
@@ -16,6 +16,21 @@ var fctMapKeyDown = function (elem,charac) {
         }
     }
 };
+
+function keyUpRickAndMorty(event){
+    if (event.defaultPrevented) {
+        return;
+    }
+    var fctMapbind = fctMapKeyUp.bind(this);
+
+    this.characters.rick.arrowMove.map(function(elem){
+        fctMapbind(elem,"rick");            
+    });
+    this.characters.morty.arrowMove.map(function(elem){
+        fctMapbind(elem,"morty");
+    });
+    event.preventDefault();
+}
 ////////////////////////////////
 function createStage1(){    
     var stage1FctDown = function (event) {
@@ -30,20 +45,6 @@ function createStage1(){
 
         event.preventDefault();
     };
-    var stage1FctUp = function (event) {
-        if (event.defaultPrevented) {
-            return;
-        }
-        var fctMapbind = fctMapKeyDown.bind(this);
-    
-        this.characters.rick.arrowMove.map(function(elem){
-            fctMapbind(elem,"rick");            
-        });
-        this.characters.morty.arrowMove.map(function(elem){
-            fctMapbind(elem,"morty");
-        });
-        event.preventDefault();
-    };
     var elemStage = {
         portal: this.objAssets.elements.portal[0]
     };
@@ -52,7 +53,7 @@ function createStage1(){
         this.characters,
         this.collisionDetector,
         stage1FctDown,
-        stage1FctUp,
+        keyUpRickAndMorty,
         this.objAssets.ui.background[0],
         "assets/sounds/midstage.mp3"
     );
@@ -71,12 +72,6 @@ function createStage1(){
         var rickIsOut = false;
         var objCollision = this.collisionDetector;
 
-        var gradient = ctxs.game.createLinearGradient(0, 0, canvasWidth, 0);
-        gradient.addColorStop("0", "black");
-        gradient.addColorStop("0.5", "black");
-        gradient.addColorStop("0.60", "yellow");
-        gradient.addColorStop("1.0", "green");
-
         drawCvPart1(ctxs.ui, canvasWidth, canvasHeight);
         drawText(ctxs.ui, 900, 240, "Compétences", "bold 18px Lucida Sans Unicode", null, null);
 
@@ -90,9 +85,6 @@ function createStage1(){
             /// Detect Collision ///
             objCollision.isOutCanvas(rick);
             objCollision.isOutCanvas(morty);
-            /// Draw line for rick and morty to walk ///
-            /* ctxs.back.fillStyle = gradient;
-            ctxs.back.fillRect(morty.x + 10, canvasHeight / 3 * 2, canvasWidth, 1); */
 
             morty.draw(ctxs.game);
             /// Make rick disappear if pass portal ///
@@ -131,9 +123,9 @@ function createStageForest(){
         if (event.defaultPrevented) {
             return;
         }
-        var fctMapbind = fctMapKeyDown.bind(this);
+        var fctMapKeyUpBind = fctMapKeyUp.bind(this);
         this.characters.morty.arrowMove.map(function(elem){
-            fctMapbind(elem,"morty");
+            fctMapKeyUpBind(elem,"morty");
         });
         
         event.preventDefault();
@@ -170,7 +162,7 @@ function createStageForest(){
         var endStage = false;
         /// Change backgound of web site ///
         changeBackgroundSite("forest");
-        //Background
+        // Draw all backgrounds elements
         this.elemBack.map(function (elem) {
             var s = new Sprite(elem, 0, 0, elem.width, elem.height);
             s.draw(ctxs.back, 0, 0, canvasWidth, canvasHeight);
@@ -251,6 +243,7 @@ function createStageForest(){
             /// Draw Clouds ///
             var testCollisionCloud;
             clouds.map(function (cloud) {
+                // Detect if cloud out of canvas
                 testCollisionCloud = objCollision.isOutCanvas(cloud);
                 if (testCollisionCloud.isOut) {
                     var skillOrBomb = createSkillOrBomb(elemStage.skills, elemStage.bomb[0], elemStage.explosion[0], cloud, canvasWidth);
@@ -262,6 +255,7 @@ function createStageForest(){
                 }
                 cloud.draw(ctxs.game);
             });
+            // Draw skills elements
             skills.map(function (skill, index) {
                 if (
                     objCollision.isCollisionCoord(
@@ -274,7 +268,7 @@ function createStageForest(){
                         skill.width,
                         skill.height - 35
                     ) && !skill.collision
-                ) { // Collision
+                ) { // There is collision with morty
                     setTimeout(function () {
                         scorePlayer += skill.score;
                         visionPlayer += 10 * skill.score;
@@ -295,13 +289,15 @@ function createStageForest(){
                             endStage = true;
                         }
                     }, 0);
-                } else { // Pas de collision
+                } else { // No collision with morty
+                    //remove skill from array if out canvas or he disappear from game
                     if (skill.y > canvasHeight || skill.alpha < 0) {
                         setTimeout(function () {
                             skills.splice(index, 1);
                         }, 0);
                     } else {
                         if (skill.x < skill.distanceFall) {
+                            // if skill fall draw behind the img who cover the game
                             skill.draw(ctxs.game);
                         } else {
                             skill.draw(ctxs.ui);
@@ -309,7 +305,7 @@ function createStageForest(){
                     }
                 }
             });
-
+            // Draw bombs
             bombs.map(function (bomb, index) {
                 if (
                     objCollision.isCollisionCoord(
@@ -322,7 +318,7 @@ function createStageForest(){
                         bomb.width,
                         bomb.height - 35
                     ) && !bomb.explode
-                ) {
+                ) { // Collision with morty
                     if (scorePlayer > 0) {
                         scorePlayer -= 1;
                     }
@@ -345,7 +341,8 @@ function createStageForest(){
                             }
                         }
                     }
-                } else {
+                } else { // No collision with morty
+                    // Remove bomb from array if is out or explosion ends
                     if (bomb.y > canvasHeight || bomb.animation.explosion.frame >= 12) {
                         setTimeout(function () {
                             bombs.splice(index, 1);
@@ -418,12 +415,15 @@ function createStageForest(){
                     rickIsOut = true;
                 }
             }
+
             if (rick.y < morty.y) {
+                // Make rick fall 
                 rick.y += 1.5;
                 if (morty.x + morty.width * 2 >= portalMorty.x) {
                     morty.x -= morty.speed * 2;
                 }
-            } else {
+            } else {// Rick same level as morty
+                // Make portal appear
                 if (portalMorty.scaleX < 0.4 || portalMorty.scaleY < 1) {
                     if (portalMorty.scaleX < 0.4) {
                         portalMorty.scaleX += 0.002;
@@ -431,7 +431,8 @@ function createStageForest(){
                     if (portalMorty.scaleY < 1) {
                         portalMorty.scaleY += 0.01;
                     }
-                } else {
+                } else {// Portal completely appear
+                    // Move rick toward the portal
                     rick.arrowMove.map(function (elem) {
                         if (elem.keyCode == 39 && !elem.keyIsUp) {
                             rick.animation.maxTime = 20;
@@ -460,7 +461,7 @@ function createStageForest(){
             });
             //Clean bombs
             bombs.map(function (bomb, index) {
-                if (bomb.y > canvasHeight) {
+                if (bomb.y > canvasHeight || bomb.animation.explosion.frame >= 12) {
                     setTimeout(function () {
                         bombs.splice(index, 1);
                     }, 0);
@@ -491,45 +492,7 @@ function createStage3(){
 
         event.preventDefault();
     };
-    var stage3FctUp = function (event) {
-        if (event.defaultPrevented) {
-            return;
-        }
-        var fctMap = function (elem, character) {
-            if (elem.keyCode == event.keyCode) {
-                character.animation.frame = 0;
-                character.animation.direction = "stayStill";
-                elem.keyIsUp = false;
-                if (event.keyCode == 16) {
-                    character.animation.maxTime = 10;
-                    character.speed = 2;
-                }
-            }
-        };
-        this.characters.rick.arrowMove.map(elem => {
-            if (elem.keyCode == event.keyCode) {
-                this.characters.rick.animation.frame = 0;
-                this.characters.rick.animation.direction = "stayStill";
-                elem.keyIsUp = false;
-                if (event.keyCode == 16) {
-                    this.characters.rick.animation.maxTime = 10;
-                    this.characters.rick.speed = 2;
-                }
-            }
-        });
-        this.characters.morty.arrowMove.map(elem => {
-            if (elem.keyCode == event.keyCode) {
-                this.characters.morty.animation.frame = 0;
-                this.characters.morty.animation.direction = "stayStill";
-                elem.keyIsUp = false;
-                if (event.keyCode == 16) {
-                    this.characters.morty.animation.maxTime = 10;
-                    this.characters.morty.speed = 2;
-                }
-            }
-        });
-        event.preventDefault();
-    };
+    
     var elemStage3 = {
         portal: this.objAssets.elements.portal[0]
     };
@@ -539,7 +502,7 @@ function createStage3(){
         this.characters,
         this.collisionDetector,
         stage3FctDown,
-        stage3FctUp,
+        keyUpRickAndMorty,
         this.objAssets.ui.background[0],
         "assets/sounds/midstage.mp3"
     );
@@ -565,11 +528,6 @@ function createStage3(){
 
         var objCollision = this.collisionDetector;
 
-        var gradient = ctxs.game.createLinearGradient(0, 0, canvasWidth, 0);
-        gradient.addColorStop("0", "black");
-        gradient.addColorStop("0.5", "black");
-        gradient.addColorStop("0.60", "yellow");
-        gradient.addColorStop("1.0", "green");
 
         drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
         drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
@@ -592,10 +550,8 @@ function createStage3(){
             drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
             drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
             ctxs.ui.fillStyle = "black";
-            drawText(ctxs.ui, 810, 260, "Expérience/Diplômes", "bold 18px Lucida Sans Unicode", "start");
+            drawText(ctxs.ui, 800, 260, "Expérience/Diplômes", "bold 18px Lucida Sans Unicode", "start");
 
-            /* ctxs.back.fillStyle = gradient;
-            ctxs.back.fillRect(morty.x + 10, canvasHeight / 3 * 2, canvasWidth, 1); */
 
             if(!(rick.x > portal.x)){
                 rick.draw(ctxs.game);
@@ -696,7 +652,7 @@ function createStageWestern(){
         //Create Experience elements
         var tabExperience = [];
         var tabText = ["Dut Informatique, Paris Descartes", "Ifocop, Formation Dev JS", "Dev Web, Institut de France", "Dev Web Le Smartsitting"];
-
+        // Every 3 sec create new TextExperience
         var idIntervalExp = setInterval(function () {
             tabExperience.push(createTextExperience(ctxs.game, canvasWidth));
         }, 3000);
@@ -756,12 +712,12 @@ function createStageWestern(){
                 /// Draw Morty and Cloud ///
                 cloud.img.draw(ctxs.game, cloud.x, cloud.y, cloud.width, cloud.height);
                 morty.draw(ctxs.game);
-                morty.animation.actualTime = 0; //to stay in the 1st frame of right animation
+                morty.animation.actualTime = 0; //to stay in the 1st frame of "right" position
                 //Draw Rick ////
                 rick.y = horse.y - 15;
                 rick.x = horse.x + 65;
                 rick.draw(ctxs.game);
-                rick.animation.actualTime = 0; //to stay in the 1st frame of right animation
+                rick.animation.actualTime = 0; //to stay in the 1st frame of "right" position
                 //Draw Tiles ////
                 tilesGrass.map(function (tile) {
                     tile.draw(ctxs.game);
@@ -774,6 +730,7 @@ function createStageWestern(){
                     //Detect Collision
                     if (objCollision.isCollisionElem(horse, exp) && !exp.isCollision) {
                         exp.sound.play();
+                        // Propagate collsion to element
                         exp.effectCollision({
                             type: "horse"
                         })
@@ -875,6 +832,7 @@ function createStageWestern(){
         function endLoop() {
 
             if (rick.y < 497 || morty.y < 490) {
+                // Make rick fall of the horse and morty from the cloud
                 if (rick.y < 497) {
                     rick.y += 2;
                 }
@@ -882,13 +840,15 @@ function createStageWestern(){
                     morty.y += 2;
                 }
             } else {
-                if (!morty.arrowMove[2].keyIsUp) {
-                    morty.arrowMove[2].keyIsUp = true;
+                // Move rick and morty
+                if (!morty.arrowMove[0].keyIsUp) {
+                    morty.arrowMove[0].keyIsUp = true;
                 }
-                if (!rick.arrowMove[2].keyIsUp) {
+                if (!rick.arrowMove[0].keyIsUp) {
 
-                    rick.arrowMove[2].keyIsUp = true;
+                    rick.arrowMove[0].keyIsUp = true;
                 }
+                // Make portal appear
                 if (portalEnd.scaleX < 0.4 || portalEnd.scaleY < 1) {
                     if (portalEnd.scaleX < 0.4) {
                         portalEnd.scaleX += 0.002;
@@ -957,46 +917,6 @@ function createStage5(){
 
         event.preventDefault();
     };
-    var stage5FctUp = function (event) {
-        if (event.defaultPrevented) {
-            return;
-        }
-        var fctMap = function (elem, character) {
-            if (elem.keyCode == event.keyCode) {
-                character.animation.frame = 0;
-                character.animation.direction = "stayStill";
-                elem.keyIsUp = false;
-                if (event.keyCode == 16) {
-                    character.animation.maxTime = 10;
-                    character.speed = 2;
-                }
-            }
-        };
-        this.characters.rick.arrowMove.map(elem => {
-            if (elem.keyCode == event.keyCode) {
-                this.characters.rick.animation.frame = 0;
-                this.characters.rick.animation.direction = "stayStill";
-                elem.keyIsUp = false;
-                if (event.keyCode == 16) {
-                    this.characters.rick.animation.maxTime = 10;
-                    this.characters.rick.speed = 2;
-                }
-            }
-        });
-        this.characters.morty.arrowMove.map(elem => {
-            if (elem.keyCode == event.keyCode) {
-                this.characters.morty.animation.frame = 0;
-                this.characters.morty.animation.direction = "stayStill";
-                elem.keyIsUp = false;
-                if (event.keyCode == 16) {
-                    this.characters.morty.animation.maxTime = 10;
-                    this.characters.morty.speed = 2;
-                }
-            }
-        });
-
-        event.preventDefault();
-    };
     var elemStage5 = {
         portal: this.objAssets.elements.portal[0]
     };
@@ -1006,7 +926,7 @@ function createStage5(){
         this.characters,
         this.collisionDetector,
         stage5FctDown,
-        stage5FctUp,
+        keyUpRickAndMorty,
         this.objAssets.ui.background[0],
         "assets/sounds/midstage.mp3"
     );
@@ -1029,11 +949,6 @@ function createStage5(){
 
         var objCollision = this.collisionDetector;
 
-        var gradient = ctxs.game.createLinearGradient(0, 0, canvasWidth, 0);
-        gradient.addColorStop("0", "black");
-        gradient.addColorStop("0.5", "black");
-        gradient.addColorStop("0.60", "yellow");
-        gradient.addColorStop("1.0", "green");
         var tabElemnentCV = getCvPart1(canvasWidth, canvasHeight).concat(
             getSkillsCv(canvasWidth, canvasHeight).concat(
                 getEndCV(canvasWidth, canvasHeight)
@@ -1099,7 +1014,7 @@ function createStage5(){
             }
             drawMovingCV(ctxs.back, tabElemnentCV, canvasWidth, canvasHeight);
             /// Draw rick and morty ///
-            // fix x of rick to follow morty
+            // fix position x of rick to follow morty
             rick.x = morty.x + 60;
             rick.draw(ctxs.game);
             morty.draw(ctxs.game);

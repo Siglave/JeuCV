@@ -835,9 +835,7 @@ class TextExperience extends Element {
         switch (collision.type) {
             case "canvas":
                 break;
-            case "horse":
-                console.log("horse");
-                
+            case "horse":                
                 break;
             default:
                 break;

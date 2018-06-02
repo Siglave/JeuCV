@@ -27,6 +27,7 @@ class Portal extends Element {
         this.sound = new Audio("assets/sounds/portal.mp3");
     }
     move() {
+        // Move portal up and down
         if (this.y < this.maxMouv && this.direction) {
             this.y += this.speed;
         } else {
@@ -46,8 +47,8 @@ class Portal extends Element {
         this.move();
 
         ctx.save();
+        // Use scale to make portal appear
         ctx.scale(this.scaleX, this.scaleY)
-        // 870 * 2.5 cause 1/0.4 = 2.5
         this.img.draw(ctx, this.x * (1 / this.scaleX), this.y * (1 / this.scaleY), this.width, this.height);
         ctx.restore();
 
@@ -163,12 +164,13 @@ class Bomb extends Element {
     draw(ctx) {
         this.move();
         if (this.explode) {
-            this.animation.explosion.explode[this.animation.explosion.frame % 12].draw(
+            var frameToDisplay = this.animation.explosion.frame % 12;
+            this.animation.explosion.explode[frameToDisplay].draw(
                 ctx,
-                this.x - (this.animation.explosion.explode[this.animation.explosion.frame % 12].sWidth / 2) + (this.width / 2),
-                this.y - (this.animation.explosion.explode[this.animation.explosion.frame % 12].sHeight / 2) + (this.height / 2),
-                this.animation.explosion.explode[this.animation.explosion.frame % 12].sWidth,
-                this.animation.explosion.explode[this.animation.explosion.frame % 12].sHeight
+                this.x - (this.animation.explosion.explode[frameToDisplay].sWidth / 2) + (this.width / 2),
+                this.y - (this.animation.explosion.explode[frameToDisplay].sHeight / 2) + (this.height / 2),
+                this.animation.explosion.explode[frameToDisplay].sWidth,
+                this.animation.explosion.explode[frameToDisplay].sHeight
             );
             if (this.animation.explosion.actualTime < this.animation.explosion.maxTime) {
                 this.animation.explosion.actualTime++;
@@ -276,14 +278,6 @@ class Character extends Element {
         this.speed = 2;
         this.isCollision = false;
         this.arrowMove = [{
-                keyCode: 38,
-                keyIsUp: false
-            }, //up
-            {
-                keyCode: 40,
-                keyIsUp: false
-            }, //down
-            {
                 keyCode: 37,
                 keyIsUp: false
             }, //left
@@ -346,12 +340,6 @@ class Character extends Element {
         this.arrowMove.map(item => {
             if (item.keyIsUp) {
                 switch (item.keyCode) {
-                    case 38: //up
-                        //this.setY(this.getY() - this.speed);
-                        break;
-                    case 40: //down
-                        //this.setY(this.getY() + this.speed);
-                        break;
                     case 37: //left
                         this.setX(this.x - this.speed);
                         this.animation.direction = "left";
@@ -441,21 +429,9 @@ class Horse extends Element {
         this.maxJump = 2;
         this.actualJump = 0;
         this.arrowMove = [{
-                keyCode: 37,
-                keyIsUp: false
-            }, //left
-            {
-                keyCode: 39,
-                keyIsUp: false
-            }, //right
-            {
-                keyCode: 16,
-                keyIsUp: false
-            }, //shift
-            {
                 keyCode: 32,
                 keyIsUp: false
-            } //shift
+            } //jump
         ];
         this.soundRun = new Audio("assets/sounds/runhorse.mp3");
         this.soundRun.volume = 0.3;
@@ -493,22 +469,20 @@ class Horse extends Element {
             this.soundRun.pause();
             this.animation.direction = "jump";
             if (this.velocityY > 0 && this.movementJumpUp) {
+                // while go up block the animation to frame 4
                 this.movementJumpUp = false;
                 this.animation.frame = 4;
             }
             this.velocityY += this.gravity;
-            if (this.movementJumpUp) {
-                this.y += this.velocityY;
-            } else {
-                this.y += this.velocityY;
-                if (this.y >= this.baseY) {
-                    this.animation.direction = "run";
-                    this.animation.frame = 0;
-                    this.isJumping = false;
-                    this.movementJumpUp = true;
-                    this.actualJump = 0;
-                    this.y = this.baseY;
-                }
+            this.y += this.velocityY;
+
+            if (this.y >= this.baseY) {
+                this.animation.direction = "run";
+                this.animation.frame = 0;
+                this.isJumping = false;
+                this.movementJumpUp = true;
+                this.actualJump = 0;
+                this.y = this.baseY;
             }
         }else{
             if(this.animation.direction == "run"){
