@@ -89,8 +89,7 @@ export class CollisionDetector {
                 return false;
             }
         }
-    }
-    testCollision() {}
+    } 
     //Out canvas compared to morty
     isOutCanvasRickAndMorty(morty, rick) {
         morty.setIsCollision(false);
