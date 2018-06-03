@@ -601,7 +601,7 @@ export class TextExperience extends Element {
 }
 
 export function createTextExperience(ctx, canvasWidth) {
-    var tabText = ["Dut Informatique, Paris Descartes", "Ifocop, Dev Full Stack JS", "Dev Web, Institut de France", "Dev Web Le Smartsitting"];
+    var tabText = ["Dut Informatique, Paris Descartes", "Ifocop, Dev Full Stack JS", "Dev Web, Institut de France", "Dev Web, Le Smartsitting"];
     var selectedIndex = randomNumber(0, tabText.length - 1);
     return new TextExperience(
         tabText[selectedIndex],
