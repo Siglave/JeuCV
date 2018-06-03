@@ -591,7 +591,7 @@ export function createStage3() {
             drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
             drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
             ctxs.ui.fillStyle = "black";
-            drawText(ctxs.ui, 800, 260, "Expérience/Diplômes", "bold 18px Lucida Sans Unicode", "start");
+            drawText(ctxs.ui, 800, 260, "Expériences/Diplômes", "bold 18px Lucida Sans Unicode", "start");
 
 
             if (!(rick.x > portal.x)) {
