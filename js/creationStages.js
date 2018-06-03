@@ -554,9 +554,6 @@ export function createStage3() {
         /// Change backgound web site ///
         changeBackgroundSite("cv");
 
-        ctxs.back.fillStyle = "white";
-        ctxs.back.fillRect(0, 0, canvasWidth, canvasHeight);
-
         // Define portal
         var portal = new Portal(this.elemStage.portal, 870, 320, 175, 175);
 
@@ -568,12 +565,6 @@ export function createStage3() {
         morty.y = canvasHeight / 3 * 2 - 79;
 
         var objCollision = this.collisionDetector;
-
-
-        drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
-        drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
-        ctxs.ui.fillStyle = "black";
-        drawText(ctxs.ui, 810, 260, "Expériences/Diplômes", "bold 18px Lucida Sans Unicode", "start");
 
         // allow to start the sound of the portal only once
         var rickIsOut = false;
@@ -591,7 +582,7 @@ export function createStage3() {
             drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
             drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
             ctxs.ui.fillStyle = "black";
-            drawText(ctxs.ui, 800, 260, "Expériences/Diplômes", "bold 18px Lucida Sans Unicode", "start");
+            drawText(ctxs.ui, 795, 260, "Expériences/Diplômes", "bold 18px Lucida Sans Unicode", "start");
 
 
             if (!(rick.x > portal.x)) {
