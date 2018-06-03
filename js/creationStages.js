@@ -573,7 +573,7 @@ export function createStage3() {
         drawCvPart1(ctxs.back, canvasWidth, canvasHeight);
         drawSkillsCv(ctxs.back, canvasWidth, canvasHeight);
         ctxs.ui.fillStyle = "black";
-        drawText(ctxs.ui, 810, 260, "Expérience/Diplômes", "bold 18px Lucida Sans Unicode", "start");
+        drawText(ctxs.ui, 810, 260, "Expériences/Diplômes", "bold 18px Lucida Sans Unicode", "start");
 
         // allow to start the sound of the portal only once
         var rickIsOut = false;
@@ -671,7 +671,6 @@ export function createStageWestern() {
     stage4.characters.horse.animation.direction = "run";
 
     stage4.start = function (ctxs, canvasWidth, canvasHeight, fctStop) {
-        console.log("salut");
         /// Show stage info UI ///
         showInfoStage(4);
         /// Change background web site ///
@@ -681,12 +680,9 @@ export function createStageWestern() {
         //Define speed for each background
         var tabSpeed = [0, 0, 0, 0.3, 1, 0.5, 1.5, 1.8, 3];
         var tabParralaxBack = [];
-        console.log("salut2");
         this.elemBack.western.map(function (elem, index) {
             tabParralaxBack.push(new BackParallax(elem, 0, 0, elem.width, elem.height, tabSpeed[index]));
         });
-        console.log("salut3");
-
         //Create Tiles Grass
         var tilesGrass = [
             new Tile(this.elemBack.tilesGrass[0], 0, 530, 360, 120, 4),
@@ -743,7 +739,6 @@ export function createStageWestern() {
         window.requestAnimationFrame(loop);
 
         function loop() {
-            console.log("salut4");
             if (!stopMainLoop) {
 
                 //Clear background ////
